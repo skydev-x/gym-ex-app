@@ -1,4 +1,4 @@
-package com.skydev.gymexercise.ui.screens
+package com.skydev.gymexercise.ui.screens.home
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button

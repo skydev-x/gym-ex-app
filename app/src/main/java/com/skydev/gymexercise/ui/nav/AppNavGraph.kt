@@ -5,8 +5,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.skydev.gymexercise.ui.screens.EditScheduleScreen
-import com.skydev.gymexercise.ui.screens.HomeScreen
+import com.skydev.gymexercise.ui.screens.edit.EditScheduleScreen
+import com.skydev.gymexercise.ui.screens.home.HomeScreen
 
 @Composable
 fun AppNavGraph(
