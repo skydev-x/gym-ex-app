@@ -5,8 +5,10 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.toRoute
 import com.skydev.gymexercise.ui.screens.edit.EditScheduleScreen
 import com.skydev.gymexercise.ui.screens.home.HomeScreen
+import com.skydev.gymexercise.ui.screens.workout.ActiveWorkoutScreen
 
 @Composable
 fun AppNavGraph(
@@ -23,6 +25,10 @@ fun AppNavGraph(
         }
         composable<EditSchedule> {
             EditScheduleScreen(navController = navController)
+        }
+        composable<ActiveWorkout> {
+            val workout: ActiveWorkout = it.toRoute()
+            ActiveWorkoutScreen(navController = navController, workoutId = workout.workoutId)
         }
     }
 }

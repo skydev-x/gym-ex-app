@@ -7,3 +7,6 @@ data object Home
 
 @Serializable
 data object EditSchedule
+
+@Serializable
+data class ActiveWorkout(val workoutId: String)
