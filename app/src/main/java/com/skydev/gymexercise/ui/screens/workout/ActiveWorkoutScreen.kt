@@ -12,6 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import com.skydev.gymexercise.ui.components.CircularProgressBar
+import com.skydev.gymexercise.ui.components.GifImage
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -32,10 +34,18 @@ fun ActiveWorkoutScreen(
             Text(text = "Day progress & current progress")
         }
         Row {
+            GifImage()
+        }
+        Row {
             Text(text = "header and meta data $workoutId")
         }
         Row {
-            Text(text = "Timer $progress")
+            CircularProgressBar(
+                progress = progress,
+                total = 6 * 60 * 1000
+            ){
+                GifImage()
+            }
         }
         Row {
             Button(onClick = {
