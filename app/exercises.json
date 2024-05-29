@@ -1,0 +1,205 @@
+[
+  {
+    "bodyPart": "back",
+    "equipment": "body weight",
+    "gifUrl": "https://v2.exercisedb.io/image/IhSIJPWFEJU76Q",
+    "id": "3293",
+    "name": "archer pull up",
+    "target": "lats",
+    "secondaryMuscles": [
+      "biceps",
+      "forearms"
+    ],
+    "instructions": [
+      "Start by hanging from a pull-up bar with an overhand grip, slightly wider than shoulder-width apart.",
+      "Engage your core and pull your shoulder blades down and back.",
+      "As you pull yourself up, bend one arm and bring your elbow towards your side, while keeping the other arm straight.",
+      "Continue pulling until your chin is above the bar and your bent arm is fully flexed.",
+      "Lower yourself back down with control, straightening the bent arm and repeating the movement on the other side.",
+      "Alternate sides with each repetition."
+    ]
+  },
+  {
+    "bodyPart": "back",
+    "equipment": "leverage machine",
+    "gifUrl": "https://v2.exercisedb.io/image/Js4jXbAEKYW8jz",
+    "id": "0015",
+    "name": "assisted parallel close grip pull-up",
+    "target": "lats",
+    "secondaryMuscles": [
+      "biceps",
+      "forearms"
+    ],
+    "instructions": [
+      "Adjust the machine to your desired weight and height.",
+      "Place your hands on the parallel bars with a close grip, palms facing each other.",
+      "Hang from the bars with your arms fully extended and your feet off the ground.",
+      "Engage your back muscles and pull your body up towards the bars, keeping your elbows close to your body.",
+      "Continue pulling until your chin is above the bars.",
+      "Pause for a moment at the top, then slowly lower your body back down to the starting position.",
+      "Repeat for the desired number of repetitions."
+    ]
+  },
+  {
+    "bodyPart": "back",
+    "equipment": "leverage machine",
+    "gifUrl": "https://v2.exercisedb.io/image/zJzZxwHW1MBBi4",
+    "id": "0017",
+    "name": "assisted pull-up",
+    "target": "lats",
+    "secondaryMuscles": [
+      "biceps",
+      "forearms"
+    ],
+    "instructions": [
+      "Adjust the machine to your desired weight and height settings.",
+      "Grasp the handles with an overhand grip, slightly wider than shoulder-width apart.",
+      "Hang with your arms fully extended and your feet off the ground.",
+      "Engage your back muscles and pull your body up towards the handles, keeping your elbows close to your body.",
+      "Continue pulling until your chin is above the handles.",
+      "Pause for a moment at the top, then slowly lower your body back down to the starting position.",
+      "Repeat for the desired number of repetitions."
+    ]
+  },
+  {
+    "bodyPart": "back",
+    "equipment": "leverage machine",
+    "gifUrl": "https://v2.exercisedb.io/image/5sokFlo35yBy59",
+    "id": "1432",
+    "name": "assisted standing pull-up",
+    "target": "lats",
+    "secondaryMuscles": [
+      "biceps",
+      "forearms"
+    ],
+    "instructions": [
+      "Adjust the machine to your desired weight and height settings.",
+      "Stand facing the machine with your feet shoulder-width apart.",
+      "Grasp the handles with an overhand grip, slightly wider than shoulder-width apart.",
+      "Engage your lats and biceps, and pull yourself up towards the handles.",
+      "Pause for a moment at the top, squeezing your back muscles.",
+      "Slowly lower yourself back down to the starting position.",
+      "Repeat for the desired number of repetitions."
+    ]
+  },
+  {
+    "bodyPart": "back",
+    "equipment": "band",
+    "gifUrl": "https://v2.exercisedb.io/image/A6-KFl2ZNIPvW7",
+    "id": "0970",
+    "name": "band assisted pull-up",
+    "target": "lats",
+    "secondaryMuscles": [
+      "biceps",
+      "forearms"
+    ],
+    "instructions": [
+      "Attach the band to a pull-up bar or sturdy anchor point.",
+      "Step onto the band and grip the bar with your palms facing away from you, hands slightly wider than shoulder-width apart.",
+      "Hang with your arms fully extended, keeping your core engaged and your shoulders down and back.",
+      "Pull your body up towards the bar by squeezing your shoulder blades together and driving your elbows down towards your hips.",
+      "Continue pulling until your chin is above the bar, then slowly lower yourself back down to the starting position.",
+      "Repeat for the desired number of repetitions."
+    ]
+  },
+  {
+    "bodyPart": "upper arms",
+    "equipment": "body weight",
+    "gifUrl": "https://v2.exercisedb.io/image/Lj4mYh4R2HfJao",
+    "id": "0140",
+    "name": "biceps pull-up",
+    "target": "biceps",
+    "secondaryMuscles": [
+      "forearms",
+      "shoulders"
+    ],
+    "instructions": [
+      "Hang from a pull-up bar with your palms facing away from you and your hands shoulder-width apart.",
+      "Engage your core and pull yourself up by bending your elbows, bringing your chest towards the bar.",
+      "Pause at the top of the movement, then slowly lower yourself back down to the starting position.",
+      "Repeat for the desired number of repetitions."
+    ]
+  },
+  {
+    "bodyPart": "chest",
+    "equipment": "body weight",
+    "gifUrl": "https://v2.exercisedb.io/image/aT8PYj0OmoF4io",
+    "id": "1430",
+    "name": "chest dip (on dip-pull-up cage)",
+    "target": "pectorals",
+    "secondaryMuscles": [
+      "triceps",
+      "shoulders"
+    ],
+    "instructions": [
+      "Adjust the dip bars to a height that allows you to comfortably grip them.",
+      "Stand between the bars and place your hands on each bar, slightly wider than shoulder-width apart.",
+      "Jump up and straighten your arms, supporting your body weight on the bars.",
+      "Bend your knees and cross your ankles behind you.",
+      "Lower your body by bending your elbows, keeping your chest up and your shoulders down.",
+      "Continue lowering until your shoulders are below your elbows or until you feel a stretch in your chest.",
+      "Push through your palms and extend your elbows to raise your body back up to the starting position.",
+      "Repeat for the desired number of repetitions."
+    ]
+  },
+  {
+    "bodyPart": "upper legs",
+    "equipment": "body weight",
+    "gifUrl": "https://v2.exercisedb.io/image/N-lthf-4rf-syB",
+    "id": "2400",
+    "name": "inverse leg curl (on pull-up cable machine)",
+    "target": "hamstrings",
+    "secondaryMuscles": [
+      "glutes",
+      "calves"
+    ],
+    "instructions": [
+      "Adjust the cable machine so that the ankle straps are at the lowest setting.",
+      "Lie face down on the bench with your legs extended and the ankle straps attached to your feet.",
+      "Hold onto the handles of the bench for stability.",
+      "Bend your knees and curl your legs towards your glutes, squeezing your hamstrings.",
+      "Pause for a moment at the top of the movement, then slowly lower your legs back to the starting position.",
+      "Repeat for the desired number of repetitions."
+    ]
+  },
+  {
+    "bodyPart": "back",
+    "equipment": "body weight",
+    "gifUrl": "https://v2.exercisedb.io/image/jPKIjlN058f818",
+    "id": "3418",
+    "name": "l-pull-up",
+    "target": "lats",
+    "secondaryMuscles": [
+      "biceps",
+      "forearms"
+    ],
+    "instructions": [
+      "Grab the pull-up bar with an overhand grip, slightly wider than shoulder-width apart.",
+      "Hang with your arms fully extended and your body straight.",
+      "Engage your lats and biceps to pull your body up towards the bar, keeping your elbows close to your body.",
+      "Continue pulling until your chin is above the bar.",
+      "Pause for a moment at the top, then slowly lower your body back down to the starting position.",
+      "Repeat for the desired number of repetitions."
+    ]
+  },
+  {
+    "bodyPart": "back",
+    "equipment": "body weight",
+    "gifUrl": "https://v2.exercisedb.io/image/eeSlkmxOiSx2V2",
+    "id": "0651",
+    "name": "pull up (neutral grip)",
+    "target": "lats",
+    "secondaryMuscles": [
+      "biceps",
+      "forearms"
+    ],
+    "instructions": [
+      "Hang from a pull-up bar with a neutral grip (palms facing each other) and your arms fully extended.",
+      "Engage your core and squeeze your shoulder blades together.",
+      "Pull your body up towards the bar by bending your elbows and driving your elbows down towards your hips.",
+      "Continue pulling until your chin is above the bar.",
+      "Pause for a moment at the top, then slowly lower your body back down to the starting position with control.",
+      "Repeat for the desired number of repetitions."
+    ]
+  }
+]

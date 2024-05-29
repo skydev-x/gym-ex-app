@@ -1,5 +1,7 @@
 package com.skydev.gymexercise.ui
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.fillMaxSize
@@ -25,6 +27,7 @@ import com.skydev.gymexercise.ui.nav.AppNavGraph
 import com.skydev.gymexercise.ui.nav.EditSchedule
 import com.skydev.gymexercise.ui.theme.GymExerciseTheme
 
+@RequiresApi(Build.VERSION_CODES.P)
 @Composable
 fun GymExApp() {
     GymExerciseTheme {
