@@ -2,6 +2,7 @@ package com.skydev.gymexercise.ui.components
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -25,7 +26,8 @@ fun AsyncGifImage(
             .decoderFactory(ImageDecoderDecoder.Factory())
             .build(),
         contentDescription = null,
-        modifier = Modifier
+        modifier = modifier
+            .size(200.dp)
             .clip(RoundedCornerShape(6.dp)),
         contentScale = ContentScale.Crop
     )
