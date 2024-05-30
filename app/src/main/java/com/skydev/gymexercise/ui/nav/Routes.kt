@@ -5,8 +5,26 @@ import kotlinx.serialization.Serializable
 @Serializable
 data object Home
 
+/**
+ * User will be able to edit the exercise session
+ * or create new one from scratch
+ * define reps, weights and time for each exercise
+ */
 @Serializable
-data object EditSchedule
+data class EditExerciseSessionRoute(
+    val exerciseId: String
+)
+
+/**
+ * User will be able to edit the routine
+ * using the routine builder
+ * add or remove exercises / breaks
+ */
+@Serializable
+data object EditRoutineRoute
 
 @Serializable
-data class ActiveWorkout(val workoutId: String)
+data object EditScheduleRoute
+
+@Serializable
+data class ActiveWorkoutRoute(val workoutId: String)

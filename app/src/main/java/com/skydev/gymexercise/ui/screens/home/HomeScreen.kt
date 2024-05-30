@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -34,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.skydev.gymexercise.ui.components.AsyncGifImage
 import com.skydev.gymexercise.ui.components.Chip
+import com.skydev.gymexercise.ui.nav.EditExerciseSessionRoute
 import org.koin.androidx.compose.koinViewModel
 
 @RequiresApi(Build.VERSION_CODES.P)
@@ -101,7 +103,10 @@ fun HomeScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp)
-                    .border(1.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(8.dp)),
+                    .border(1.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(8.dp))
+                    .clickable {
+                        navController.navigate(EditExerciseSessionRoute(exercise.id))
+                    },
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Top
             ) {

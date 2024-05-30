@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import com.skydev.gymexercise.ui.components.BottomBar
 import com.skydev.gymexercise.ui.nav.AppNavGraph
-import com.skydev.gymexercise.ui.nav.EditSchedule
+import com.skydev.gymexercise.ui.nav.EditScheduleRoute
 import com.skydev.gymexercise.ui.theme.GymExerciseTheme
 
 @RequiresApi(Build.VERSION_CODES.P)
@@ -39,7 +39,7 @@ fun GymExApp() {
             floatingActionButton = {
                 IconButton(
                     onClick = {
-                        navController.navigate(EditSchedule)
+                        navController.navigate(EditScheduleRoute)
                     },
                     modifier = Modifier
                         .size(48.dp)

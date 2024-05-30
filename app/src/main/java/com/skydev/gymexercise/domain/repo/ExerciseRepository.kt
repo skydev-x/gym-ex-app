@@ -29,8 +29,8 @@ class ExerciseRepository(
         return data
     }
 
-    override fun getExerciseById(id: String) {
-        exerciseDao.getExerciseById(id)
+    override fun getExerciseById(id: String): Exercise {
+        return exerciseDao.getExerciseById(id)
     }
 
     override fun insertAll(exercises: List<Exercise>) {

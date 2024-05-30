@@ -1,5 +1,6 @@
 package com.skydev.gymexercise.di
 
+import com.skydev.gymexercise.ui.screens.editExerciseSession.EditExerciseSessionViewModel
 import com.skydev.gymexercise.ui.screens.home.HomeViewModel
 import com.skydev.gymexercise.ui.screens.workout.WorkoutViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -12,5 +13,9 @@ val viewModelModule = module {
     viewModel {
         // Provide HomeViewModel
         HomeViewModel(get(), get())
+    }
+    viewModel {
+        // Provide EditExerciseSessionViewModel
+        EditExerciseSessionViewModel(get())
     }
 }

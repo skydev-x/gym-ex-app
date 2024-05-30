@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.skydev.gymexercise.ui.screens.edit.EditScheduleScreen
+import com.skydev.gymexercise.ui.screens.editExerciseSession.EditExerciseSessionScreen
 import com.skydev.gymexercise.ui.screens.home.HomeScreen
 import com.skydev.gymexercise.ui.screens.workout.ActiveWorkoutScreen
 
@@ -26,12 +27,19 @@ fun AppNavGraph(
         composable<Home> {
             HomeScreen(navController = navController)
         }
-        composable<EditSchedule> {
+        composable<EditScheduleRoute> {
             EditScheduleScreen(navController = navController)
         }
-        composable<ActiveWorkout> {
-            val workout: ActiveWorkout = it.toRoute()
+        composable<ActiveWorkoutRoute> {
+            val workout: ActiveWorkoutRoute = it.toRoute()
             ActiveWorkoutScreen(navController = navController, workoutId = workout.workoutId)
+        }
+        composable<EditExerciseSessionRoute> {
+            val exerciseSession: EditExerciseSessionRoute = it.toRoute()
+            EditExerciseSessionScreen(
+                navController = navController,
+                exerciseId = exerciseSession.exerciseId
+            )
         }
     }
 }
