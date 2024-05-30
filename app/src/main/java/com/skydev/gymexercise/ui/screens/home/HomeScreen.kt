@@ -105,6 +105,7 @@ fun HomeScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Top
             ) {
+                Spacer(modifier = Modifier.padding(8.dp))
                 AsyncGifImage(url = exercise.gifUrl)
                 Text(
                     text = exercise.name,
