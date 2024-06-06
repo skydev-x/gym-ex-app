@@ -33,7 +33,6 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.skydev.gymexercise.ui.components.AsyncGifImage
 import com.skydev.gymexercise.ui.components.Chip
 import com.skydev.gymexercise.ui.nav.EditExerciseSessionRoute
 import org.koin.androidx.compose.koinViewModel
@@ -71,7 +70,9 @@ fun HomeScreen(
     val keyboardController = LocalSoftwareKeyboardController.current
 
     LazyColumn(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier
+            .fillMaxSize()
+            .padding(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         stickyHeader {
@@ -111,7 +112,7 @@ fun HomeScreen(
                 verticalArrangement = Arrangement.Top
             ) {
                 Spacer(modifier = Modifier.padding(8.dp))
-                AsyncGifImage(url = exercise.gifUrl)
+//                    AsyncGifImage(url = exercise.gifUrl)
                 Text(
                     text = exercise.name,
                     modifier = Modifier.fillMaxWidth(),
@@ -135,4 +136,6 @@ fun HomeScreen(
             }
         }
     }
+
+
 }
