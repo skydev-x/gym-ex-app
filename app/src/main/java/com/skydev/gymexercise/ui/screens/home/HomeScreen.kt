@@ -217,6 +217,72 @@ fun HomeScreen(
             }
         }
 
+        //left
+        Canvas(
+            modifier = Modifier
+                .offset(x = height.times(0.24f), y = -height.times(0.54f))
+                .graphicsLayer {
+                    rotationZ = 22f
+                }
+        ) {
+            tricepFront1.toPath(Size(height.div(3f).value, height.div(3.5f).value))?.let {
+                drawPath(
+                    path = it,
+                    color = Color.Yellow
+                )
+            }
+        }
+
+        //right
+        Canvas(
+            modifier = Modifier
+                .offset(x = -height.times(0.23f), y = -height.times(0.54f))
+                .graphicsLayer {
+                    rotationZ = 22f
+                    rotationY = 180f
+                }
+        ) {
+            tricepFront1.toPath(Size(height.div(3f).value, height.div(3.5f).value))?.let {
+                drawPath(
+                    path = it,
+                    color = Color.Yellow
+                )
+            }
+        }
+
+        //right
+        Canvas(
+            modifier = Modifier
+                .offset(x = -height.times(0.17f), y = -height.times(0.5f))
+                .graphicsLayer {
+                    rotationZ = 22f
+                    rotationY = 180f
+                }
+        ) {
+            tricepFront2.toPath(Size(height.div(3f).value, height.div(3.5f).value))?.let {
+                drawPath(
+                    path = it,
+                    color = Color.Yellow
+                )
+            }
+        }
+
+        //left
+        Canvas(
+            modifier = Modifier
+                .offset(x = height.times(0.18f), y = -height.times(0.5f))
+                .graphicsLayer {
+                    rotationZ = 22f
+                }
+        ) {
+            tricepFront2.toPath(Size(height.div(3f).value, height.div(3.5f).value))?.let {
+                drawPath(
+                    path = it,
+                    color = Color.Yellow
+                )
+            }
+        }
+
         Canvas(
             modifier = Modifier
                 .offset(x = -height.times(0.31f), y = -height.times(0.55f))
@@ -281,6 +347,8 @@ fun HomeScreen(
 
 
 
+
+
         Box(
             Modifier
                 .width(1.dp)
@@ -334,6 +402,12 @@ val bicepMajorLeft =
 
 val bicepMinorLeft =
     "M336.375 68.75C330.875 50.375 329.5 34.625 301.5 0.875L307.875 4.25C313.833 8.83333 328.025 21.425 337.125 35.125C348.5 52.25 354.75 62.125 360.5 82.25C365.1 98.35 365.833 119.208 365.625 127.625C364.825 130.425 363.708 136.208 363.25 138.75C353.65 136.35 346.75 132.083 344.5 130.25C344.333 128.875 344.1 124.65 344.5 118.75C345 111.375 341.875 87.125 336.375 68.75Z"
+
+val tricepFront1 =
+    "M1.5 25.25L0.375 0.125L6 9.125C8.04167 12.6667 12.325 20.525 13.125 23.625C14.125 27.5 20.375 43.875 21.5 47.625C22.625 51.375 23.25 62.5 23.125 64C23.025 65.2 23.5 68.0833 23.75 69.375C23.75 70.0833 23.85 72.55 24.25 76.75C24.65 80.95 20.8333 93 18.875 98.5C17.625 60.25 11.375 47.375 8.75 40C6.65 34.1 3.04167 27.7083 1.5 25.25Z"
+
+val tricepFront2 =
+    "M0.75 10.125V0.875C3.85 7.275 12.125 21.2917 15.875 27.5L18.25 37.5L24.75 60.625C11.45 40.625 3.20833 18.625 0.75 10.125Z"
 
 fun String?.toPath(size: Size?, pathDestination: Path? = null): Path? {
     this?.let {
