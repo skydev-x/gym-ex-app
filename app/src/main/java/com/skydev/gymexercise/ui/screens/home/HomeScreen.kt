@@ -32,7 +32,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.Outline
@@ -152,6 +154,7 @@ fun HomeScreen(
     Box(
         Modifier
             .fillMaxSize()
+            .background(Brush.linearGradient(listOf(Color.DarkGray, Color.Black, Color.Gray)))
             .padding(16.dp), contentAlignment = Alignment.Center
     ) {
 
@@ -244,6 +247,21 @@ fun HomeScreen(
             }
         }
 
+        var frontNeck by remember {
+            mutableStateOf(false)
+        }
+        val frontNeckColor by remember {
+            derivedStateOf {
+                if (frontNeck) Color.Yellow else Color.Gray
+            }
+        }
+
+        FrontNeck(
+            height = height, color = frontNeckColor
+        ) {
+            frontNeck = !frontNeck
+        }
+
         ChestPec(
             height = height, color = chestColor
         ) {
@@ -292,17 +310,581 @@ fun HomeScreen(
             oblique = !oblique
         }
 
-
-        Box(
-            Modifier
-                .width(1.dp)
-                .fillMaxHeight()
-                .background(Color.Red)
-        )
-
+        //lower body
+        FrontLegs(
+            height = height, color = frontDeltColor
+        ) { }
     }
 
 
+}
+
+
+@Composable
+fun FrontLegs(
+    height: Dp, color: Color, onClick: () -> Unit
+) {
+    AbductorAndHipFlexor(height = height, color) { onClick() }
+    Adductor(height, color, onClick)
+    Quads(height, color) { onClick() }
+    Calves(height, color, onClick)
+}
+
+@Composable
+fun Calves(
+    height: Dp, color: Color, onClick: () -> Unit
+) {
+
+    Box(
+        modifier = Modifier
+            .offset(x = -height.times(0.08f), y = height.times(0.68f))
+            .graphicsLayer {
+                rotationZ = 0f
+            }
+    ) {
+
+        Box(modifier = Modifier
+            .size(height.div(24f), height.div(2.2f))
+            .clip(ShapePath(calf4))
+            .border(
+                shape = ShapePath(calf4), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+    Box(
+        modifier = Modifier
+            .offset(x = -height.times(0.145f), y = height.times(0.68f))
+            .graphicsLayer {
+                rotationZ = 0f
+            }
+    ) {
+
+        Box(modifier = Modifier
+            .size(height.div(12f), height.div(2.2f))
+            .clip(ShapePath(calf3))
+            .border(
+                shape = ShapePath(calf3), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+    Box(
+        modifier = Modifier
+            .offset(x = -height.times(0.13f), y = height.times(0.68f))
+            .graphicsLayer {
+                rotationZ = 0f
+            }
+    ) {
+
+        Box(modifier = Modifier
+            .size(height.div(12f), height.div(2.2f))
+            .clip(ShapePath(calf2))
+            .border(
+                shape = ShapePath(calf2), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+    Box(
+        modifier = Modifier
+            .offset(x = -height.times(0.12f), y = height.times(0.65f))
+            .graphicsLayer {
+                rotationZ = 0f
+            }
+    ) {
+
+        Box(modifier = Modifier
+            .size(height.div(12f), height.div(2f))
+            .clip(ShapePath(calf1))
+            .border(
+                shape = ShapePath(calf1), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+    //reflection
+    Box(
+        modifier = Modifier
+            .offset(x = height.times(0.08f), y = height.times(0.68f))
+            .graphicsLayer {
+                rotationZ = 0f
+                rotationY =180f
+            }
+    ) {
+
+        Box(modifier = Modifier
+            .size(height.div(24f), height.div(2.2f))
+            .clip(ShapePath(calf4))
+            .border(
+                shape = ShapePath(calf4), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+    Box(
+        modifier = Modifier
+            .offset(x = height.times(0.145f), y = height.times(0.68f))
+            .graphicsLayer {
+                rotationZ = 0f
+                rotationY =180f
+            }
+    ) {
+
+        Box(modifier = Modifier
+            .size(height.div(12f), height.div(2.2f))
+            .clip(ShapePath(calf3))
+            .border(
+                shape = ShapePath(calf3), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+    Box(
+        modifier = Modifier
+            .offset(x = height.times(0.13f), y = height.times(0.68f))
+            .graphicsLayer {
+                rotationZ = 0f
+                rotationY =180f
+            }
+    ) {
+
+        Box(modifier = Modifier
+            .size(height.div(12f), height.div(2.2f))
+            .clip(ShapePath(calf2))
+            .border(
+                shape = ShapePath(calf2), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+    Box(
+        modifier = Modifier
+            .offset(x = height.times(0.12f), y = height.times(0.65f))
+            .graphicsLayer {
+                rotationZ = 0f
+                rotationY =180f
+            }
+    ) {
+
+        Box(modifier = Modifier
+            .size(height.div(12f), height.div(2f))
+            .clip(ShapePath(calf1))
+            .border(
+                shape = ShapePath(calf1), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+
+}
+
+@Composable
+fun Adductor(
+    height: Dp, color: Color, onClick: () -> Unit
+) {
+
+    Box(
+        modifier = Modifier
+            .offset(x = -height.times(0.03f), y = height.times(0.14f))
+            .graphicsLayer {
+                rotationZ = 0f
+            }
+    ) {
+
+        Box(modifier = Modifier
+            .size(height.div(32f), height.div(5f))
+            .clip(ShapePath(adductor1))
+            .border(
+                shape = ShapePath(adductor1), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+
+    Box(
+        modifier = Modifier
+            .offset(x = -height.times(0.025f), y = height.times(0.11f))
+            .graphicsLayer {
+                rotationZ = 0f
+            }
+    ) {
+
+        Box(modifier = Modifier
+            .size(height.div(32f), height.div(5f))
+            .clip(ShapePath(adductor2))
+            .border(
+                shape = ShapePath(adductor2), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+    Box(
+        modifier = Modifier
+            .offset(x = height.times(0.03f), y = height.times(0.14f))
+            .graphicsLayer {
+                rotationZ = 0f
+                rotationY = 180f
+            }
+    ) {
+
+        Box(modifier = Modifier
+            .size(height.div(32f), height.div(5f))
+            .clip(ShapePath(adductor1))
+            .border(
+                shape = ShapePath(adductor1), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+
+    Box(
+        modifier = Modifier
+            .offset(x = height.times(0.025f), y = height.times(0.11f))
+            .graphicsLayer {
+                rotationZ = 0f
+                rotationY = 180f
+            }
+    ) {
+
+        Box(modifier = Modifier
+            .size(height.div(32f), height.div(5f))
+            .clip(ShapePath(adductor2))
+            .border(
+                shape = ShapePath(adductor2), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+}
+
+
+@Composable
+fun Quads(
+    height: Dp, color: Color, onClick: () -> Unit
+) {
+
+    Box(
+        modifier = Modifier
+            .offset(x = -height.times(0.152f), y = -height.times(0.016f))
+            .graphicsLayer {
+                rotationZ = 0f
+            }
+    ) {
+
+        Box(modifier = Modifier
+            .size(height.div(12f), height.div(4f))
+            .clip(ShapePath(quad1))
+            .border(
+                shape = ShapePath(quad1), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+
+    Box(
+        modifier = Modifier
+            .offset(x = -height.times(0.152f), y = height.times(0.169f))
+            .graphicsLayer {
+                rotationZ = 0f
+            }
+    ) {
+
+        Box(modifier = Modifier
+            .size(height.div(12f), height.div(2.2f))
+            .clip(ShapePath(quad2))
+            .border(
+                shape = ShapePath(quad2), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+
+    Box(
+        modifier = Modifier
+            .offset(x = -height.times(0.112f), y = height.times(0.13f))
+            .graphicsLayer {
+                rotationZ = 0f
+            }
+    ) {
+
+        Box(modifier = Modifier
+            .size(height.div(10f), height.div(2f))
+            .clip(ShapePath(quad3))
+            .border(
+                shape = ShapePath(quad3), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+
+    Box(
+        modifier = Modifier
+            .offset(x = -height.times(0.06f), y = height.times(0.25f))
+            .graphicsLayer {
+                rotationZ = 0f
+            }
+    ) {
+
+        Box(modifier = Modifier
+            .size(height.div(23f), height.div(3f))
+            .clip(ShapePath(quad4))
+            .border(
+                shape = ShapePath(quad4), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+
+    Box(
+        modifier = Modifier
+            .offset(x = height.times(0.152f), y = -height.times(0.016f))
+            .graphicsLayer {
+                rotationZ = 0f
+                rotationY = 180f
+            }
+    ) {
+
+        Box(modifier = Modifier
+            .size(height.div(12f), height.div(4f))
+            .clip(ShapePath(quad1))
+            .border(
+                shape = ShapePath(quad1), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+
+    Box(
+        modifier = Modifier
+            .offset(x = height.times(0.152f), y = height.times(0.169f))
+            .graphicsLayer {
+                rotationZ = 0f
+                rotationY = 180f
+            }
+    ) {
+
+        Box(modifier = Modifier
+            .size(height.div(12f), height.div(2.2f))
+            .clip(ShapePath(quad2))
+            .border(
+                shape = ShapePath(quad2), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+
+    Box(
+        modifier = Modifier
+            .offset(x = height.times(0.112f), y = height.times(0.13f))
+            .graphicsLayer {
+                rotationZ = 0f
+                rotationY = 180f
+            }
+    ) {
+
+        Box(modifier = Modifier
+            .size(height.div(10f), height.div(2f))
+            .clip(ShapePath(quad3))
+            .border(
+                shape = ShapePath(quad3), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+
+    Box(
+        modifier = Modifier
+            .offset(x = height.times(0.06f), y = height.times(0.25f))
+            .graphicsLayer {
+                rotationZ = 0f
+                rotationY = 180f
+            }
+    ) {
+
+        Box(modifier = Modifier
+            .size(height.div(23f), height.div(3f))
+            .clip(ShapePath(quad4))
+            .border(
+                shape = ShapePath(quad4), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+
+    Box(
+        modifier = Modifier
+            .offset(x = -height.times(0.075f), y = height.times(0.085f))
+            .graphicsLayer {
+                rotationZ = 6f
+            }
+    ) {
+
+        Box(modifier = Modifier
+            .size(height.div(9f), height.div(2.7f))
+            .clip(ShapePath(sartorius))
+            .border(
+                shape = ShapePath(sartorius), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+
+    Box(
+        modifier = Modifier
+            .offset(x = height.times(0.075f), y = height.times(0.085f))
+            .graphicsLayer {
+                rotationZ = 6f
+                rotationY = 180f
+            }
+    ) {
+
+        Box(modifier = Modifier
+            .size(height.div(9f), height.div(2.7f))
+            .clip(ShapePath(sartorius))
+            .border(
+                shape = ShapePath(sartorius), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+}
+
+@Composable
+fun AbductorAndHipFlexor(
+    height: Dp, color: Color, onClick: () -> Unit
+) {
+    Box(
+        modifier = Modifier
+            .offset(x = -height.times(0.162f), y = -height.times(0.115f))
+            .graphicsLayer {
+                rotationZ = 0f
+            }
+    ) {
+
+        Box(modifier = Modifier
+            .size(height.div(32f), height.div(8f))
+            .clip(ShapePath(abductor))
+            .border(
+                shape = ShapePath(abductor), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+    Box(
+        modifier = Modifier
+            .offset(x = height.times(0.162f), y = -height.times(0.115f))
+            .graphicsLayer {
+                rotationZ = 0f
+                rotationY = 180f
+            }
+    ) {
+
+        Box(modifier = Modifier
+            .size(height.div(32f), height.div(8f))
+            .clip(ShapePath(abductor))
+            .border(
+                shape = ShapePath(abductor), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+    Box(
+        modifier = Modifier
+            .offset(x = -height.times(0.06f), y = -height.times(0.0001f))
+            .graphicsLayer {
+                rotationZ = 0f
+            }
+    ) {
+        Box(modifier = Modifier
+            .size(height.div(20f), height.div(4f))
+            .clip(ShapePath(hipFlexor))
+            .border(
+                shape = ShapePath(hipFlexor), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+    Box(
+        modifier = Modifier
+            .offset(x = height.times(0.06f), y = -height.times(0.0001f))
+            .graphicsLayer {
+                rotationZ = 0f
+                rotationY = 180f
+            }
+    ) {
+        Box(modifier = Modifier
+            .size(height.div(20f), height.div(4f))
+            .clip(ShapePath(hipFlexor))
+            .border(
+                shape = ShapePath(hipFlexor), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+}
+
+
+@Composable
+fun FrontNeck(
+    height: Dp, color: Color, onClick: () -> Unit
+) {
+
+    Box(
+        modifier = Modifier
+            .offset(x = height.times(0.025f), y = -height.times(0.7f))
+    ) {
+
+        Box(modifier = Modifier
+            .size(height.div(12f), height.div(8f))
+            .clip(ShapePath(frontNeck))
+            .border(
+                shape = ShapePath(frontNeck), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+    Box(
+        modifier = Modifier
+            .offset(x = -height.times(0.025f), y = -height.times(0.7f))
+            .graphicsLayer {
+                rotationY = 180f
+            }
+    ) {
+
+        Box(modifier = Modifier
+            .size(height.div(12f), height.div(8f))
+            .clip(ShapePath(frontNeck))
+            .border(
+                shape = ShapePath(frontNeck), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
 }
 
 @Composable
@@ -1222,6 +1804,49 @@ val oblique7 =
 
 val oblique8 =
     "M4.60067 0.25C3.72567 11.375 14.9423 17.6406 21.9423 21.3906C30.4293 24.9505 34.775 26.0396 38.3683 42.4993C42.2433 60.2493 44.2433 57.7493 46.1183 68.6243C47.9933 79.4993 47.2434 90.9324 45.9934 98.8074C43.7434 90.6245 42.2308 87.3842 40.2775 84.124C39.2274 82.3714 38.1171 80.8306 36.7434 78.6243C34.8985 75.6613 31.0284 73.4734 26.7434 71.5686C21.4472 69.2144 15.5172 67.2926 11.9934 64.8743C9.17706 62.9415 7.14138 60.838 5.60618 58.499C3.66628 55.5435 2.51254 51.4618 1.60542 47.624C1.60542 44.5733 1.37562 41.2928 1.1497 35.874C1.04237 33.2998 0.93594 30.243 0.855419 26.499C0.663498 17.5747 3.34458 9.23978 4.60067 0.25Z"
+
+val frontNeck =
+    "M19 17.5C22.0417 15.5833 29.5 9.475 35 0.375L34.75 14.25V27.375C33.9583 28.4583 31.9 34.45 30 49.75C28.1 65.05 28.875 72.2083 29.5 73.875L17.625 75.375L19.875 67.25L24.875 40.625L28.625 27.375C24 36.5 17.25 58.75 16.875 60.25C16.5 61.75 15.875 65.125 11.5 73.25C8 79.75 2.45833 82.125 0.125 82.5C1.29167 80.7917 3.75 76.975 4.25 75.375C4.875 73.375 4.625 74 8.125 53.125C10.925 36.425 16.5417 22.4167 19 17.5Z"
+
+val abductor =
+    "M13 6.625L15 10.625L8.375 27.125L4.875 36.75L0.5 49.625L2.75 36.75L4.875 23L7.625 11.875L11 0.875L13 6.625Z"
+
+val hipFlexor =
+    "M24.625 54.125C26.25 64.5 22 69.25 20.5 79.875C19.4987 86.9673 19.5302 90.2015 19.7375 91.3203L19.875 91.75C19.8267 91.681 19.7786 91.5423 19.7375 91.3203L11.875 66.75C10.3333 60.6667 7 46.575 6 38.875C5 31.175 2.08333 9.75 0.75 0L2.875 3.875L7.25 17.375L9.75 24.5L15.25 36.25L24.625 54.125Z"
+
+val quad1 =
+    "M46.5817 13.75C39.3317 10.625 30.0817 7.5 25.5817 0.875L19.7067 15L15.4567 27L12.3317 35.25L10.0817 45.25L9.33173 51.625L8.45673 57.875L5.45673 79.125C4.16506 90.0417 1.43172 113.75 0.831726 121.25C0.231728 128.75 0.581726 148.208 0.831726 157C3.83173 125.5 9.83173 114 12.5817 105.875C15.3317 97.75 21.5817 85.125 31.2067 71C40.8317 56.875 44.7067 44.75 46.5817 32.375C48.4567 20 46.5817 14.5 46.5817 13.75Z"
+
+val quad2 =
+    "M23.4865 23C28.3615 14.625 27.6115 17.875 38.1115 0L31.3615 21.75L26.4865 39C25.3198 43.6667 22.5364 55.75 20.7365 66.75C18.9365 77.75 18.4865 90.8333 18.4865 96V110.5L19.3615 124.75L20.7365 138C21.7781 145.375 23.9865 160.825 24.4865 163.625C25.1115 167.125 29.1115 183.5 30.8615 189.875C32.6115 196.25 35.6115 200 38.8615 216.5C41.4615 229.7 35.9448 242.833 32.8615 247.75C28.7615 255.35 23.6531 258.583 21.6115 259.25C20.7115 256.75 17.8198 237.042 16.4865 227.5C18.2365 221.25 17.2365 212 13.1115 201.625C8.98645 191.25 5.36145 176 4.11145 168.875C2.86145 161.75 -0.38855 115 0.36145 97C0.961449 82.6 6.27812 62.9167 8.86145 54.875C12.1115 47.0417 19.5865 29.7 23.4865 23Z"
+
+val quad3 =
+    "M43.7383 91.0007C38.2383 75.0007 33.8633 54.0007 32.8633 37.2507C32.2607 27.1582 30.4386 11.5158 28.9883 0.171875L28.2383 7.37571L26.3633 17.1257L23.6133 26.5007L19.8633 35.8757C16.8633 44.1674 9.71328 66.1757 5.11328 87.8757C-0.636719 115.001 -0.761719 134.251 0.988281 160.001C2.38828 180.601 6.98828 203.917 9.11328 213.001C10.2383 217.626 13.7133 230.226 18.6133 243.626C22.8611 255.242 21.2784 267.072 19.4517 273.381C19.151 274.136 18.8688 274.963 18.6133 275.876C18.885 275.188 19.1712 274.349 19.4517 273.381C21.2101 268.966 23.6006 267.029 24.9883 265.001C26.6133 262.626 33.6133 263.876 37.7383 265.001C41.0383 265.901 43.1966 272.626 43.8633 275.876L44.7383 262.751L46.9883 247.251L51.1133 218.626L53.9883 189.876L55.4883 160.876V143.626C55.2383 137.751 54.6133 125.101 54.1133 121.501C53.4883 117.001 49.2383 107.001 43.7383 91.0007Z"
+
+val quad4 =
+    "M11.4356 42.375C11.6439 35.2917 11.6606 16.95 10.0606 0.25C11.1856 3.45833 13.8855 11.875 15.6855 19.875C17.9355 29.875 20.1855 45.5 21.5605 54.625C22.6605 61.925 24.6855 79.25 25.5605 87L27.8105 106.875C27.5105 111.075 25.6855 124.625 24.8105 130.875L22.4355 142.875L21.6855 149.125C20.2272 153.75 16.6355 163.625 13.9355 166.125C10.5605 169.25 9.43555 170.75 4.18555 166.625C-1.06445 162.5 0.0605469 151.25 0.185547 146.75C0.310547 142.25 2.81055 123.5 4.93555 111.625C6.63555 102.125 9.06057 78 10.0606 67.125L11.4356 42.375Z"
+
+val sartorius =
+    "M10.125 6.375L14.75 13.625L16.5 28.375L18.375 41.625L19.625 50.5L21.75 63.375L23.75 72.75L28 88.125L32.75 102.125L36.125 113L39.625 125.5L42 135.75L44.375 148.875L46 162.625L47.25 178.875L47.625 198.5L47.25 213.625V225.5L45 238.875L42.375 214.75L39.75 193.875L35.75 167C34.0833 158.5 30.2 139.8 28 133C25.25 124.5 20 109.375 17.375 102.125C15.275 96.325 12.4167 86.125 11.25 81.75L8.25 65.125L5.25 41.625L1 0.625L6 3L10.125 6.375Z"
+
+val adductor1 =
+    "M1.83811 20.5C4.08811 14.125 6.83811 5.25 5.83811 0.25L13.2131 20.5L17.8381 35.375L19.2131 41.125C21.0881 48.2917 24.8631 66.45 24.9631 81.75C25.0631 97.05 24.0048 110.208 23.4631 114.875L19.2131 134.125L14.2131 157.625V147.625V115.75C13.9631 108.125 12.7881 89 10.0881 73.5C6.71311 54.125 3.08811 45 1.83811 41.125C0.58811 37.25 -0.41189 26.875 1.83811 20.5Z"
+
+val adductor2 =
+    "M23.1247 42.625C20.0831 36.5833 11.1997 19.675 -0.000263214 0.375C1.24976 5.75 8.16641 25.5417 10.2498 32.5C10.8331 34.0833 12.7498 41.375 15.7498 57.875C18.7498 74.375 17.8331 98.4167 16.9998 108.375C17.6247 104.875 19.3747 94.9 21.3747 83C23.3747 71.1 23.3747 51.125 23.1247 42.625Z"
+
+val calf1 =
+    "M-7.62939e-06 27.125C3.99999 20.125 7.74999 10.75 7.12499 0L9 5.375L10.625 11.625L12.5 18.25L14.125 26.125L16 35.5L17.375 43L18.25 49.125L19.5 57.25L21 65.875L22.375 76.125L23.375 84.25L24.5 94.5L26.625 118.125L28.875 146.5L30.875 167.75L32.75 182.875L35.25 200L38.875 219.625L42.5 239L36.25 241.375L34.625 232.75L32.75 222.125L31.75 218.875L27 200.875L20.5 172.875L14.375 145.5L5.875 106.5C4.33333 98.7083 1.3 78.95 1.5 62.25C1.7 45.55 0.583328 31.875 -7.62939e-06 27.125Z"
+
+val calf2 =
+    "M9.5 35.25C9.7 18.55 8.58333 4.875 7.99999 0.125L4.625 4.875L3.875 16.625C3.41667 22.8333 2.2 37.05 1 44.25C-0.200001 51.45 1.5 64.9167 2.5 70.75L8.125 101.125L15 141.625C16.2083 148.458 18.9 165.175 20 177.375C21.1 189.575 20.4583 197.458 20 199.875L17.875 211.125L19 220.5L28.5 222.25L35.5 218.5L35 212.5L33.5 197.375L31.75 179.125L27.125 141.625L22.375 118.5L13.875 79.5C12.3333 71.7083 9.3 51.95 9.5 35.25Z"
+
+val calf3 =
+    "M24.0001 173.375C25.1001 185.575 24.4584 193.458 24.0001 195.875L21.8751 207.5L22.8751 216.625L17.5001 215.25L19.3751 195.5L19.6251 188.625L19.1251 179.375L17.5001 164.625L15.3751 150L12.8751 135.25L10.1251 116.875L7.75006 102L5.25006 85.875L3.25006 72.375L1.62506 58.125L0.500061 46.875V38.875L2.25006 18.625L4.37506 5L8.62506 0.875L7.87506 12.625C7.41672 18.8333 6.20006 33.05 5.00006 40.25C3.80005 47.45 5.50006 60.9167 6.50006 66.75L12.1251 97.125L19.0001 137.625C20.2084 144.458 22.9001 161.175 24.0001 173.375Z"
+
+val calf4 =
+    "M11.5547 14.625C13.4297 12 17.3047 5.45 17.8047 0.25L18.1797 4L20.3047 16.125L21.9297 24.25L23.1797 31.5L24.1797 38.375L24.9297 47.875L25.3047 58.125L24.6797 70.625C24.388 72.9583 23.6297 78.775 22.9297 83.375C22.0547 89.125 19.3047 98.25 18.4297 100.75C17.7297 102.75 14.5547 115.333 13.0547 121.375L9.05469 146.25L7.05469 166.375L4.67969 141.125L2.67969 109.375C2.22135 100.292 1.20469 78.525 0.804688 64.125C0.304688 46.125 3.42969 33.125 4.42969 28C5.22969 23.9 9.51302 17.375 11.5547 14.625Z"
+
 
 fun String?.toPath(size: Size?, pathDestination: Path? = null): Path? {
     this?.let {
