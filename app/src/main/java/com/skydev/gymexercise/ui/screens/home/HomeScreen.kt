@@ -33,6 +33,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.Shape
@@ -411,6 +412,42 @@ fun HomeScreen(
             }
         }
 
+
+        //right
+        Canvas(
+            modifier = Modifier
+                .offset(x = -height.times(0.36f), y = -height.times(0.33f))
+                .graphicsLayer {
+                    rotationZ = 6f
+                }
+                .clickable { }
+        ) {
+            wristFlexor.toPath(Size(height.div(3).value, height.div(1.6f).value))?.let {
+                drawPath(
+                    path = it,
+                    color = Color.Magenta.copy(0.5f)
+                )
+            }
+        }
+
+        //left
+        Canvas(
+            modifier = Modifier
+                .offset(x = height.times(0.36f), y = -height.times(0.33f))
+                .graphicsLayer {
+                    rotationZ = 6f
+                    rotationY = 180f
+                }
+                .clickable { }
+        ) {
+            wristFlexor.toPath(Size(height.div(3).value, height.div(1.6f).value))?.let {
+                drawPath(
+                    path = it,
+                    color = Color.Magenta.copy(0.5f)
+                )
+            }
+        }
+
         Image(
             painter = painterResource(R.drawable.oblique),
             contentDescription = null,
@@ -418,6 +455,16 @@ fun HomeScreen(
                 .scale(height.value * 0.0017f)
                 .offset(y = -height.times(0.58f))
                 .clickable { }
+        )
+
+        Image(
+            painter = painterResource(R.drawable.abs),
+            contentDescription = null,
+            modifier = Modifier
+                .scale(height.value * 0.0015f)
+                .offset(y = -height.times(0.58f))
+                .clickable { },
+            colorFilter = ColorFilter.tint(Color.Black)
         )
 
         Box(
@@ -482,6 +529,9 @@ val tricepFront2 =
 
 val forearm =
     "M8.24988 15.875C7.99988 13.75 8.12488 7.375 7.37488 0.75L9.49988 6.75L11.4999 15.875L14.2499 22.625L21.4999 35.375C23.4165 41.125 27.9499 55.175 30.7499 65.375C34.2499 78.125 34.1249 89.875 39.7499 113C44.2499 131.5 48.6249 140.625 50.2499 142.875L51.9999 157.625C49.9582 155.167 42.1499 145.25 27.2499 125.25C8.62488 100.25 0.999876 73.625 0.624876 67.625C0.249876 61.625 3.37488 49.375 3.99988 46.75C4.62488 44.125 8.62488 34.375 9.12488 28.5C9.62488 22.625 8.49988 18 8.24988 15.875Z"
+
+val wristFlexor =
+    "M78.375 26C79.7917 25.0833 84.7 18.675 93 0.375C92.3 4.175 86.2083 21.875 83.25 30.25L77.125 48.5C72.0833 57.75 61.225 77.475 58.125 82.375C54.25 88.5 40 107.625 35.875 110.75C31.75 113.875 24.5 123.5 18.75 131C14.15 137 6.75 150.917 3.625 157.125L0 156.125C1.875 151.083 7.9 137.35 17 122.75C26.1 108.15 32.2917 88.8333 34.25 81L38.75 71L43.625 58.625L49.875 53L67.625 37.875L78.375 26Z"
 
 fun String?.toPath(size: Size?, pathDestination: Path? = null): Path? {
     this?.let {
