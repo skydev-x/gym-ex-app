@@ -8,7 +8,9 @@ import android.text.TextUtils
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -28,6 +30,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Outline
@@ -38,10 +41,12 @@ import androidx.compose.ui.graphics.asComposePath
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.PathParser
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.skydev.gymexercise.R
 import org.koin.androidx.compose.koinViewModel
 
 @RequiresApi(Build.VERSION_CODES.P)
@@ -160,7 +165,10 @@ fun HomeScreen(
                 .background(Color.Gray),
         )
 
-        Canvas(modifier = Modifier.offset(x = -height.times(0.22f), y = -height.times(0.65f))) {
+        Canvas(
+            modifier = Modifier
+                .offset(x = -height.times(0.22f), y = -height.times(0.65f))
+                .clickable { }) {
             pathChestLeft.toPath(Size(height.div(1.7f).value, height.div(2).value))?.let {
                 drawPath(
                     path = it,
@@ -169,7 +177,10 @@ fun HomeScreen(
             }
         }
 
-        Canvas(modifier = Modifier.offset(x = -height.times(0.21f), y = -height.times(0.65f))) {
+        Canvas(
+            modifier = Modifier
+                .offset(x = -height.times(0.21f), y = -height.times(0.65f))
+                .clickable { }) {
             pathChestRight.toPath(Size(height.div(1.7f).value, height.div(2).value))?.let {
                 drawPath(
                     path = it,
@@ -179,7 +190,10 @@ fun HomeScreen(
         }
 
         //size
-        Canvas(modifier = Modifier.offset(x = -height.times(0.295f), y = -height.times(0.68f))) {
+        Canvas(
+            modifier = Modifier
+                .offset(x = -height.times(0.295f), y = -height.times(0.68f))
+                .clickable { }) {
             fDeltRight.toPath(Size(height.div(2).value, height.div(2).value))?.let {
                 drawPath(
                     path = it,
@@ -189,7 +203,10 @@ fun HomeScreen(
         }
 
         //side
-        Canvas(modifier = Modifier.offset(x = -height.times(0.245f), y = -height.times(0.68f))) {
+        Canvas(
+            modifier = Modifier
+                .offset(x = -height.times(0.245f), y = -height.times(0.68f))
+                .clickable { }) {
             fDeltLeft.toPath(Size(height.div(2).value, height.div(2).value))?.let {
                 drawPath(
                     path = it,
@@ -199,7 +216,10 @@ fun HomeScreen(
         }
 
 
-        Canvas(modifier = Modifier.offset(x = -height.times(0.27f), y = -height.times(0.67f))) {
+        Canvas(
+            modifier = Modifier
+                .offset(x = -height.times(0.27f), y = -height.times(0.67f))
+                .clickable { }) {
             fDeltRight.toPath(Size(height.div(2).value, height.div(2).value))?.let {
                 drawPath(
                     path = it,
@@ -208,7 +228,10 @@ fun HomeScreen(
             }
         }
 
-        Canvas(modifier = Modifier.offset(x = -height.times(0.266f), y = -height.times(0.67f))) {
+        Canvas(
+            modifier = Modifier
+                .offset(x = -height.times(0.266f), y = -height.times(0.67f))
+                .clickable { }) {
             fDeltLeft.toPath(Size(height.div(2).value, height.div(2).value))?.let {
                 drawPath(
                     path = it,
@@ -224,6 +247,7 @@ fun HomeScreen(
                 .graphicsLayer {
                     rotationZ = 22f
                 }
+                .clickable { }
         ) {
             tricepFront1.toPath(Size(height.div(3f).value, height.div(3.5f).value))?.let {
                 drawPath(
@@ -241,6 +265,7 @@ fun HomeScreen(
                     rotationZ = 22f
                     rotationY = 180f
                 }
+                .clickable { }
         ) {
             tricepFront1.toPath(Size(height.div(3f).value, height.div(3.5f).value))?.let {
                 drawPath(
@@ -258,6 +283,7 @@ fun HomeScreen(
                     rotationZ = 22f
                     rotationY = 180f
                 }
+                .clickable { }
         ) {
             tricepFront2.toPath(Size(height.div(3f).value, height.div(3.5f).value))?.let {
                 drawPath(
@@ -274,6 +300,7 @@ fun HomeScreen(
                 .graphicsLayer {
                     rotationZ = 22f
                 }
+                .clickable { }
         ) {
             tricepFront2.toPath(Size(height.div(3f).value, height.div(3.5f).value))?.let {
                 drawPath(
@@ -289,6 +316,7 @@ fun HomeScreen(
                 .graphicsLayer {
                     rotationZ = -8f
                 }
+                .clickable { }
         ) {
             bicepMajorRight.toPath(Size(height.div(3).value, height.div(1.6f).value))?.let {
                 drawPath(
@@ -305,6 +333,7 @@ fun HomeScreen(
                 .graphicsLayer {
                     rotationZ = 8f
                 }
+                .clickable { }
         ) {
             bicepMajorLeft.toPath(Size(height.div(3).value, height.div(1.6f).value))?.let {
                 drawPath(
@@ -321,6 +350,7 @@ fun HomeScreen(
                     rotationZ = 6f
                     rotationY = 180f
                 }
+                .clickable { }
         ) {
             bicepMinorLeft.toPath(Size(height.div(3).value, height.div(1.6f).value))?.let {
                 drawPath(
@@ -336,6 +366,7 @@ fun HomeScreen(
                 .graphicsLayer {
                     rotationZ = 6f
                 }
+                .clickable { }
         ) {
             bicepMinorLeft.toPath(Size(height.div(3).value, height.div(1.6f).value))?.let {
                 drawPath(
@@ -345,9 +376,49 @@ fun HomeScreen(
             }
         }
 
+        //right
+        Canvas(
+            modifier = Modifier
+                .offset(x = -height.times(0.3f), y = -height.times(0.38f))
+                .graphicsLayer {
+                    rotationZ = 6f
+                    rotationY = 180f
+                }
+                .clickable { }
+        ) {
+            forearm.toPath(Size(height.div(3).value, height.div(1.6f).value))?.let {
+                drawPath(
+                    path = it,
+                    color = Color.Magenta.copy(0.75f)
+                )
+            }
+        }
 
+        //left
+        Canvas(
+            modifier = Modifier
+                .offset(x = height.times(0.3f), y = -height.times(0.38f))
+                .graphicsLayer {
+                    rotationZ = 6f
+                }
+                .clickable { }
+        ) {
+            forearm.toPath(Size(height.div(3).value, height.div(1.6f).value))?.let {
+                drawPath(
+                    path = it,
+                    color = Color.Magenta.copy(0.75f)
+                )
+            }
+        }
 
-
+        Image(
+            painter = painterResource(R.drawable.oblique),
+            contentDescription = null,
+            modifier = Modifier
+                .scale(height.value * 0.0017f)
+                .offset(y = -height.times(0.58f))
+                .clickable { }
+        )
 
         Box(
             Modifier
@@ -408,6 +479,9 @@ val tricepFront1 =
 
 val tricepFront2 =
     "M0.75 10.125V0.875C3.85 7.275 12.125 21.2917 15.875 27.5L18.25 37.5L24.75 60.625C11.45 40.625 3.20833 18.625 0.75 10.125Z"
+
+val forearm =
+    "M8.24988 15.875C7.99988 13.75 8.12488 7.375 7.37488 0.75L9.49988 6.75L11.4999 15.875L14.2499 22.625L21.4999 35.375C23.4165 41.125 27.9499 55.175 30.7499 65.375C34.2499 78.125 34.1249 89.875 39.7499 113C44.2499 131.5 48.6249 140.625 50.2499 142.875L51.9999 157.625C49.9582 155.167 42.1499 145.25 27.2499 125.25C8.62488 100.25 0.999876 73.625 0.624876 67.625C0.249876 61.625 3.37488 49.375 3.99988 46.75C4.62488 44.125 8.62488 34.375 9.12488 28.5C9.62488 22.625 8.49988 18 8.24988 15.875Z"
 
 fun String?.toPath(size: Size?, pathDestination: Path? = null): Path? {
     this?.let {
