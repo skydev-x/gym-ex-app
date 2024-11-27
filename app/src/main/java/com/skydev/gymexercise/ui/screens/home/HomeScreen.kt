@@ -6,20 +6,16 @@ import android.graphics.RectF
 import android.os.Build
 import android.text.TextUtils
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -31,12 +27,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.Shape
@@ -45,13 +38,12 @@ import androidx.compose.ui.graphics.asComposePath
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.PathParser
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.skydev.gymexercise.R
+import com.skydev.gymexercise.ui.theme.Melon
 import org.koin.androidx.compose.koinViewModel
 
 @RequiresApi(Build.VERSION_CODES.P)
@@ -154,7 +146,7 @@ fun HomeScreen(
     Box(
         Modifier
             .fillMaxSize()
-            .background(Brush.linearGradient(listOf(Color.DarkGray, Color.Black, Color.Gray)))
+            .background(Brush.linearGradient(listOf(Color.Black, Color.Black.copy(0.5f))))
             .padding(16.dp), contentAlignment = Alignment.Center
     ) {
 
@@ -166,7 +158,7 @@ fun HomeScreen(
                 .size(height)
                 .aspectRatio(0.5f)
                 .clip(ShapePath(pathHuman))
-                .background(Color.LightGray)
+                .background(Melon)
                 .clickable { },
         )
 
@@ -304,13 +296,11 @@ fun HomeScreen(
         }
 
         Oblique(
-            height = height,
-            color = obliqueColor
+            height = height, color = obliqueColor
         ) {
             oblique = !oblique
         }
 
-        //lower body
         FrontLegs(
             height = height, color = frontDeltColor
         ) { }
@@ -335,13 +325,11 @@ fun Calves(
     height: Dp, color: Color, onClick: () -> Unit
 ) {
 
-    Box(
-        modifier = Modifier
-            .offset(x = -height.times(0.08f), y = height.times(0.68f))
-            .graphicsLayer {
-                rotationZ = 0f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = -height.times(0.08f), y = height.times(0.68f))
+        .graphicsLayer {
+            rotationZ = 0f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(24f), height.div(2.2f))
@@ -352,13 +340,11 @@ fun Calves(
             .background(color)
             .clickable { onClick() })
     }
-    Box(
-        modifier = Modifier
-            .offset(x = -height.times(0.145f), y = height.times(0.68f))
-            .graphicsLayer {
-                rotationZ = 0f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = -height.times(0.145f), y = height.times(0.68f))
+        .graphicsLayer {
+            rotationZ = 0f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(12f), height.div(2.2f))
@@ -370,13 +356,11 @@ fun Calves(
             .clickable { onClick() })
     }
 
-    Box(
-        modifier = Modifier
-            .offset(x = -height.times(0.13f), y = height.times(0.68f))
-            .graphicsLayer {
-                rotationZ = 0f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = -height.times(0.13f), y = height.times(0.68f))
+        .graphicsLayer {
+            rotationZ = 0f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(12f), height.div(2.2f))
@@ -388,13 +372,11 @@ fun Calves(
             .clickable { onClick() })
     }
 
-    Box(
-        modifier = Modifier
-            .offset(x = -height.times(0.12f), y = height.times(0.65f))
-            .graphicsLayer {
-                rotationZ = 0f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = -height.times(0.12f), y = height.times(0.65f))
+        .graphicsLayer {
+            rotationZ = 0f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(12f), height.div(2f))
@@ -407,14 +389,12 @@ fun Calves(
     }
 
     //reflection
-    Box(
-        modifier = Modifier
-            .offset(x = height.times(0.08f), y = height.times(0.68f))
-            .graphicsLayer {
-                rotationZ = 0f
-                rotationY =180f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = height.times(0.08f), y = height.times(0.68f))
+        .graphicsLayer {
+            rotationZ = 0f
+            rotationY = 180f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(24f), height.div(2.2f))
@@ -425,14 +405,12 @@ fun Calves(
             .background(color)
             .clickable { onClick() })
     }
-    Box(
-        modifier = Modifier
-            .offset(x = height.times(0.145f), y = height.times(0.68f))
-            .graphicsLayer {
-                rotationZ = 0f
-                rotationY =180f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = height.times(0.145f), y = height.times(0.68f))
+        .graphicsLayer {
+            rotationZ = 0f
+            rotationY = 180f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(12f), height.div(2.2f))
@@ -444,14 +422,12 @@ fun Calves(
             .clickable { onClick() })
     }
 
-    Box(
-        modifier = Modifier
-            .offset(x = height.times(0.13f), y = height.times(0.68f))
-            .graphicsLayer {
-                rotationZ = 0f
-                rotationY =180f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = height.times(0.13f), y = height.times(0.68f))
+        .graphicsLayer {
+            rotationZ = 0f
+            rotationY = 180f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(12f), height.div(2.2f))
@@ -463,14 +439,12 @@ fun Calves(
             .clickable { onClick() })
     }
 
-    Box(
-        modifier = Modifier
-            .offset(x = height.times(0.12f), y = height.times(0.65f))
-            .graphicsLayer {
-                rotationZ = 0f
-                rotationY =180f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = height.times(0.12f), y = height.times(0.65f))
+        .graphicsLayer {
+            rotationZ = 0f
+            rotationY = 180f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(12f), height.div(2f))
@@ -490,13 +464,11 @@ fun Adductor(
     height: Dp, color: Color, onClick: () -> Unit
 ) {
 
-    Box(
-        modifier = Modifier
-            .offset(x = -height.times(0.03f), y = height.times(0.14f))
-            .graphicsLayer {
-                rotationZ = 0f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = -height.times(0.03f), y = height.times(0.14f))
+        .graphicsLayer {
+            rotationZ = 0f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(32f), height.div(5f))
@@ -509,13 +481,11 @@ fun Adductor(
     }
 
 
-    Box(
-        modifier = Modifier
-            .offset(x = -height.times(0.025f), y = height.times(0.11f))
-            .graphicsLayer {
-                rotationZ = 0f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = -height.times(0.025f), y = height.times(0.11f))
+        .graphicsLayer {
+            rotationZ = 0f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(32f), height.div(5f))
@@ -527,14 +497,12 @@ fun Adductor(
             .clickable { onClick() })
     }
 
-    Box(
-        modifier = Modifier
-            .offset(x = height.times(0.03f), y = height.times(0.14f))
-            .graphicsLayer {
-                rotationZ = 0f
-                rotationY = 180f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = height.times(0.03f), y = height.times(0.14f))
+        .graphicsLayer {
+            rotationZ = 0f
+            rotationY = 180f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(32f), height.div(5f))
@@ -547,14 +515,12 @@ fun Adductor(
     }
 
 
-    Box(
-        modifier = Modifier
-            .offset(x = height.times(0.025f), y = height.times(0.11f))
-            .graphicsLayer {
-                rotationZ = 0f
-                rotationY = 180f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = height.times(0.025f), y = height.times(0.11f))
+        .graphicsLayer {
+            rotationZ = 0f
+            rotationY = 180f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(32f), height.div(5f))
@@ -573,13 +539,11 @@ fun Quads(
     height: Dp, color: Color, onClick: () -> Unit
 ) {
 
-    Box(
-        modifier = Modifier
-            .offset(x = -height.times(0.152f), y = -height.times(0.016f))
-            .graphicsLayer {
-                rotationZ = 0f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = -height.times(0.152f), y = -height.times(0.016f))
+        .graphicsLayer {
+            rotationZ = 0f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(12f), height.div(4f))
@@ -592,13 +556,11 @@ fun Quads(
     }
 
 
-    Box(
-        modifier = Modifier
-            .offset(x = -height.times(0.152f), y = height.times(0.169f))
-            .graphicsLayer {
-                rotationZ = 0f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = -height.times(0.152f), y = height.times(0.169f))
+        .graphicsLayer {
+            rotationZ = 0f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(12f), height.div(2.2f))
@@ -611,13 +573,11 @@ fun Quads(
     }
 
 
-    Box(
-        modifier = Modifier
-            .offset(x = -height.times(0.112f), y = height.times(0.13f))
-            .graphicsLayer {
-                rotationZ = 0f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = -height.times(0.112f), y = height.times(0.13f))
+        .graphicsLayer {
+            rotationZ = 0f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(10f), height.div(2f))
@@ -630,13 +590,11 @@ fun Quads(
     }
 
 
-    Box(
-        modifier = Modifier
-            .offset(x = -height.times(0.06f), y = height.times(0.25f))
-            .graphicsLayer {
-                rotationZ = 0f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = -height.times(0.06f), y = height.times(0.25f))
+        .graphicsLayer {
+            rotationZ = 0f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(23f), height.div(3f))
@@ -649,14 +607,12 @@ fun Quads(
     }
 
 
-    Box(
-        modifier = Modifier
-            .offset(x = height.times(0.152f), y = -height.times(0.016f))
-            .graphicsLayer {
-                rotationZ = 0f
-                rotationY = 180f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = height.times(0.152f), y = -height.times(0.016f))
+        .graphicsLayer {
+            rotationZ = 0f
+            rotationY = 180f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(12f), height.div(4f))
@@ -669,14 +625,12 @@ fun Quads(
     }
 
 
-    Box(
-        modifier = Modifier
-            .offset(x = height.times(0.152f), y = height.times(0.169f))
-            .graphicsLayer {
-                rotationZ = 0f
-                rotationY = 180f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = height.times(0.152f), y = height.times(0.169f))
+        .graphicsLayer {
+            rotationZ = 0f
+            rotationY = 180f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(12f), height.div(2.2f))
@@ -689,14 +643,12 @@ fun Quads(
     }
 
 
-    Box(
-        modifier = Modifier
-            .offset(x = height.times(0.112f), y = height.times(0.13f))
-            .graphicsLayer {
-                rotationZ = 0f
-                rotationY = 180f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = height.times(0.112f), y = height.times(0.13f))
+        .graphicsLayer {
+            rotationZ = 0f
+            rotationY = 180f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(10f), height.div(2f))
@@ -709,14 +661,12 @@ fun Quads(
     }
 
 
-    Box(
-        modifier = Modifier
-            .offset(x = height.times(0.06f), y = height.times(0.25f))
-            .graphicsLayer {
-                rotationZ = 0f
-                rotationY = 180f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = height.times(0.06f), y = height.times(0.25f))
+        .graphicsLayer {
+            rotationZ = 0f
+            rotationY = 180f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(23f), height.div(3f))
@@ -729,13 +679,11 @@ fun Quads(
     }
 
 
-    Box(
-        modifier = Modifier
-            .offset(x = -height.times(0.075f), y = height.times(0.085f))
-            .graphicsLayer {
-                rotationZ = 6f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = -height.times(0.075f), y = height.times(0.085f))
+        .graphicsLayer {
+            rotationZ = 6f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(9f), height.div(2.7f))
@@ -748,14 +696,12 @@ fun Quads(
     }
 
 
-    Box(
-        modifier = Modifier
-            .offset(x = height.times(0.075f), y = height.times(0.085f))
-            .graphicsLayer {
-                rotationZ = 6f
-                rotationY = 180f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = height.times(0.075f), y = height.times(0.085f))
+        .graphicsLayer {
+            rotationZ = 6f
+            rotationY = 180f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(9f), height.div(2.7f))
@@ -773,13 +719,11 @@ fun Quads(
 fun AbductorAndHipFlexor(
     height: Dp, color: Color, onClick: () -> Unit
 ) {
-    Box(
-        modifier = Modifier
-            .offset(x = -height.times(0.162f), y = -height.times(0.115f))
-            .graphicsLayer {
-                rotationZ = 0f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = -height.times(0.162f), y = -height.times(0.115f))
+        .graphicsLayer {
+            rotationZ = 0f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(32f), height.div(8f))
@@ -791,14 +735,12 @@ fun AbductorAndHipFlexor(
             .clickable { onClick() })
     }
 
-    Box(
-        modifier = Modifier
-            .offset(x = height.times(0.162f), y = -height.times(0.115f))
-            .graphicsLayer {
-                rotationZ = 0f
-                rotationY = 180f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = height.times(0.162f), y = -height.times(0.115f))
+        .graphicsLayer {
+            rotationZ = 0f
+            rotationY = 180f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(32f), height.div(8f))
@@ -810,13 +752,11 @@ fun AbductorAndHipFlexor(
             .clickable { onClick() })
     }
 
-    Box(
-        modifier = Modifier
-            .offset(x = -height.times(0.06f), y = -height.times(0.0001f))
-            .graphicsLayer {
-                rotationZ = 0f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = -height.times(0.06f), y = -height.times(0.0001f))
+        .graphicsLayer {
+            rotationZ = 0f
+        }) {
         Box(modifier = Modifier
             .size(height.div(20f), height.div(4f))
             .clip(ShapePath(hipFlexor))
@@ -827,14 +767,12 @@ fun AbductorAndHipFlexor(
             .clickable { onClick() })
     }
 
-    Box(
-        modifier = Modifier
-            .offset(x = height.times(0.06f), y = -height.times(0.0001f))
-            .graphicsLayer {
-                rotationZ = 0f
-                rotationY = 180f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = height.times(0.06f), y = -height.times(0.0001f))
+        .graphicsLayer {
+            rotationZ = 0f
+            rotationY = 180f
+        }) {
         Box(modifier = Modifier
             .size(height.div(20f), height.div(4f))
             .clip(ShapePath(hipFlexor))
@@ -854,8 +792,7 @@ fun FrontNeck(
 ) {
 
     Box(
-        modifier = Modifier
-            .offset(x = height.times(0.025f), y = -height.times(0.7f))
+        modifier = Modifier.offset(x = height.times(0.025f), y = -height.times(0.7f))
     ) {
 
         Box(modifier = Modifier
@@ -868,13 +805,11 @@ fun FrontNeck(
             .clickable { onClick() })
     }
 
-    Box(
-        modifier = Modifier
-            .offset(x = -height.times(0.025f), y = -height.times(0.7f))
-            .graphicsLayer {
-                rotationY = 180f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = -height.times(0.025f), y = -height.times(0.7f))
+        .graphicsLayer {
+            rotationY = 180f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(12f), height.div(8f))
@@ -894,14 +829,12 @@ fun BoxScope.Oblique(
 
     Box(modifier = Modifier.align(Alignment.Center)) {
 
-        Box(
-            modifier = Modifier
-                .offset(x = -height.times(0.18f), y = -height.times(0.38f))
-                .graphicsLayer {
-                    rotationZ = 94f
-                    rotationX = 180f
-                }
-        ) {
+        Box(modifier = Modifier
+            .offset(x = -height.times(0.18f), y = -height.times(0.38f))
+            .graphicsLayer {
+                rotationZ = 94f
+                rotationX = 180f
+            }) {
 
             Box(modifier = Modifier
                 .size(height.div(6f), height.div(30f))
@@ -914,12 +847,9 @@ fun BoxScope.Oblique(
         }
 
 
-        Box(
-            modifier = Modifier
-                .offset(x = -height.times(0.085f), y = -height.times(0.36f))
-                .graphicsLayer {
-                }
-        ) {
+        Box(modifier = Modifier
+            .offset(x = -height.times(0.085f), y = -height.times(0.36f))
+            .graphicsLayer {}) {
 
             Box(modifier = Modifier
                 .size(height.div(10f), height.div(18f))
@@ -931,12 +861,9 @@ fun BoxScope.Oblique(
                 .clickable { onClick() })
         }
 
-        Box(
-            modifier = Modifier
-                .offset(x = -height.times(0.085f), y = -height.times(0.33f))
-                .graphicsLayer {
-                }
-        ) {
+        Box(modifier = Modifier
+            .offset(x = -height.times(0.085f), y = -height.times(0.33f))
+            .graphicsLayer {}) {
 
             Box(modifier = Modifier
                 .size(height.div(14f), height.div(20f))
@@ -949,12 +876,9 @@ fun BoxScope.Oblique(
         }
 
 
-        Box(
-            modifier = Modifier
-                .offset(x = -height.times(0.085f), y = -height.times(0.31f))
-                .graphicsLayer {
-                }
-        ) {
+        Box(modifier = Modifier
+            .offset(x = -height.times(0.085f), y = -height.times(0.31f))
+            .graphicsLayer {}) {
 
             Box(modifier = Modifier
                 .size(height.div(20f), height.div(20f))
@@ -967,12 +891,9 @@ fun BoxScope.Oblique(
         }
 
 
-        Box(
-            modifier = Modifier
-                .offset(x = -height.times(0.075f), y = -height.times(0.26f))
-                .graphicsLayer {
-                }
-        ) {
+        Box(modifier = Modifier
+            .offset(x = -height.times(0.075f), y = -height.times(0.26f))
+            .graphicsLayer {}) {
 
             Box(modifier = Modifier
                 .size(height.div(22f), height.div(20f))
@@ -985,12 +906,9 @@ fun BoxScope.Oblique(
         }
 
 
-        Box(
-            modifier = Modifier
-                .offset(x = -height.times(0.075f), y = -height.times(0.28f))
-                .graphicsLayer {
-                }
-        ) {
+        Box(modifier = Modifier
+            .offset(x = -height.times(0.075f), y = -height.times(0.28f))
+            .graphicsLayer {}) {
 
             Box(modifier = Modifier
                 .size(height.div(20f), height.div(20f))
@@ -1002,12 +920,9 @@ fun BoxScope.Oblique(
                 .clickable { onClick() })
         }
 
-        Box(
-            modifier = Modifier
-                .offset(x = -height.times(0.07f), y = -height.times(0.22f))
-                .graphicsLayer {
-                }
-        ) {
+        Box(modifier = Modifier
+            .offset(x = -height.times(0.07f), y = -height.times(0.22f))
+            .graphicsLayer {}) {
 
             Box(modifier = Modifier
                 .size(height.div(24f), height.div(20f))
@@ -1020,12 +935,9 @@ fun BoxScope.Oblique(
         }
 
 
-        Box(
-            modifier = Modifier
-                .offset(x = -height.times(0.07f), y = -height.times(0.20f))
-                .graphicsLayer {
-                }
-        ) {
+        Box(modifier = Modifier
+            .offset(x = -height.times(0.07f), y = -height.times(0.20f))
+            .graphicsLayer {}) {
 
             Box(modifier = Modifier
                 .size(height.div(20f), height.div(12f))
@@ -1038,12 +950,9 @@ fun BoxScope.Oblique(
         }
 
 
-        Box(
-            modifier = Modifier
-                .offset(x = -height.times(0.072f), y = -height.times(0.16f))
-                .graphicsLayer {
-                }
-        ) {
+        Box(modifier = Modifier
+            .offset(x = -height.times(0.072f), y = -height.times(0.16f))
+            .graphicsLayer {}) {
 
             Box(modifier = Modifier
                 .size(height.div(14f), height.div(5f))
@@ -1065,15 +974,13 @@ fun BoxScope.Oblique(
         contentAlignment = Alignment.CenterEnd
     ) {
 
-        Box(
-            modifier = Modifier
-                .offset(x = height.times(0.18f), y = -height.times(0.38f))
-                .graphicsLayer {
-                    rotationZ = 94f
-                    rotationX = 180f
-                    rotationY = 180f
-                }
-        ) {
+        Box(modifier = Modifier
+            .offset(x = height.times(0.18f), y = -height.times(0.38f))
+            .graphicsLayer {
+                rotationZ = 94f
+                rotationX = 180f
+                rotationY = 180f
+            }) {
 
             Box(modifier = Modifier
                 .size(height.div(6f), height.div(30f))
@@ -1086,13 +993,11 @@ fun BoxScope.Oblique(
         }
 
 
-        Box(
-            modifier = Modifier
-                .offset(x = height.times(0.085f), y = -height.times(0.36f))
-                .graphicsLayer {
-                    rotationY = 180f
-                }
-        ) {
+        Box(modifier = Modifier
+            .offset(x = height.times(0.085f), y = -height.times(0.36f))
+            .graphicsLayer {
+                rotationY = 180f
+            }) {
 
             Box(modifier = Modifier
                 .size(height.div(10f), height.div(18f))
@@ -1104,13 +1009,11 @@ fun BoxScope.Oblique(
                 .clickable { onClick() })
         }
 
-        Box(
-            modifier = Modifier
-                .offset(x = height.times(0.085f), y = -height.times(0.33f))
-                .graphicsLayer {
-                    rotationY = 180f
-                }
-        ) {
+        Box(modifier = Modifier
+            .offset(x = height.times(0.085f), y = -height.times(0.33f))
+            .graphicsLayer {
+                rotationY = 180f
+            }) {
 
             Box(modifier = Modifier
                 .size(height.div(14f), height.div(20f))
@@ -1123,13 +1026,11 @@ fun BoxScope.Oblique(
         }
 
 
-        Box(
-            modifier = Modifier
-                .offset(x = height.times(0.085f), y = -height.times(0.30f))
-                .graphicsLayer {
-                    rotationY = 180f
-                }
-        ) {
+        Box(modifier = Modifier
+            .offset(x = height.times(0.085f), y = -height.times(0.30f))
+            .graphicsLayer {
+                rotationY = 180f
+            }) {
 
             Box(modifier = Modifier
                 .size(height.div(20f), height.div(20f))
@@ -1142,13 +1043,11 @@ fun BoxScope.Oblique(
         }
 
 
-        Box(
-            modifier = Modifier
-                .offset(x = height.times(0.075f), y = -height.times(0.25f))
-                .graphicsLayer {
-                    rotationY = 180f
-                }
-        ) {
+        Box(modifier = Modifier
+            .offset(x = height.times(0.075f), y = -height.times(0.25f))
+            .graphicsLayer {
+                rotationY = 180f
+            }) {
 
             Box(modifier = Modifier
                 .size(height.div(22f), height.div(20f))
@@ -1161,13 +1060,11 @@ fun BoxScope.Oblique(
         }
 
 
-        Box(
-            modifier = Modifier
-                .offset(x = height.times(0.075f), y = -height.times(0.27f))
-                .graphicsLayer {
-                    rotationY = 180f
-                }
-        ) {
+        Box(modifier = Modifier
+            .offset(x = height.times(0.075f), y = -height.times(0.27f))
+            .graphicsLayer {
+                rotationY = 180f
+            }) {
 
             Box(modifier = Modifier
                 .size(height.div(20f), height.div(20f))
@@ -1179,13 +1076,11 @@ fun BoxScope.Oblique(
                 .clickable { onClick() })
         }
 
-        Box(
-            modifier = Modifier
-                .offset(x = height.times(0.07f), y = -height.times(0.21f))
-                .graphicsLayer {
-                    rotationY = 180f
-                }
-        ) {
+        Box(modifier = Modifier
+            .offset(x = height.times(0.07f), y = -height.times(0.21f))
+            .graphicsLayer {
+                rotationY = 180f
+            }) {
 
             Box(modifier = Modifier
                 .size(height.div(24f), height.div(20f))
@@ -1198,13 +1093,11 @@ fun BoxScope.Oblique(
         }
 
 
-        Box(
-            modifier = Modifier
-                .offset(x = height.times(0.07f), y = -height.times(0.18f))
-                .graphicsLayer {
-                    rotationY = 180f
-                }
-        ) {
+        Box(modifier = Modifier
+            .offset(x = height.times(0.07f), y = -height.times(0.18f))
+            .graphicsLayer {
+                rotationY = 180f
+            }) {
 
             Box(modifier = Modifier
                 .size(height.div(20f), height.div(12f))
@@ -1216,13 +1109,11 @@ fun BoxScope.Oblique(
                 .clickable { onClick() })
         }
 
-        Box(
-            modifier = Modifier
-                .offset(x = height.times(0.072f), y = -height.times(0.09f))
-                .graphicsLayer {
-                    rotationY = 180f
-                }
-        ) {
+        Box(modifier = Modifier
+            .offset(x = height.times(0.072f), y = -height.times(0.09f))
+            .graphicsLayer {
+                rotationY = 180f
+            }) {
 
             Box(modifier = Modifier
                 .size(height.div(14f), height.div(5f))
@@ -1244,8 +1135,7 @@ fun Abs(
     Box {
 
         Box(
-            modifier = Modifier
-                .offset(x = -height.times(0.055f), y = -height.times(0.38f))
+            modifier = Modifier.offset(x = -height.times(0.055f), y = -height.times(0.38f))
         ) {
 
             Box(modifier = Modifier
@@ -1259,8 +1149,7 @@ fun Abs(
         }
 
         Box(
-            modifier = Modifier
-                .offset(x = -height.times(0.06f), y = -height.times(0.32f))
+            modifier = Modifier.offset(x = -height.times(0.06f), y = -height.times(0.32f))
         ) {
 
             Box(modifier = Modifier
@@ -1274,8 +1163,7 @@ fun Abs(
         }
 
         Box(
-            modifier = Modifier
-                .offset(x = -height.times(0.055f), y = -height.times(0.23f))
+            modifier = Modifier.offset(x = -height.times(0.055f), y = -height.times(0.23f))
         ) {
 
             Box(modifier = Modifier
@@ -1289,13 +1177,11 @@ fun Abs(
         }
 
 
-        Box(
-            modifier = Modifier
-                .offset(x = height.times(0.055f), y = -height.times(0.38f))
-                .graphicsLayer {
-                    rotationY = 180f
-                }
-        ) {
+        Box(modifier = Modifier
+            .offset(x = height.times(0.055f), y = -height.times(0.38f))
+            .graphicsLayer {
+                rotationY = 180f
+            }) {
 
             Box(modifier = Modifier
                 .size(height.div(9f), height.div(9f))
@@ -1307,13 +1193,11 @@ fun Abs(
                 .clickable { onClick() })
         }
 
-        Box(
-            modifier = Modifier
-                .offset(x = height.times(0.06f), y = -height.times(0.32f))
-                .graphicsLayer {
-                    rotationY = 180f
-                }
-        ) {
+        Box(modifier = Modifier
+            .offset(x = height.times(0.06f), y = -height.times(0.32f))
+            .graphicsLayer {
+                rotationY = 180f
+            }) {
 
             Box(modifier = Modifier
                 .size(height.div(9f), height.div(9f))
@@ -1325,13 +1209,11 @@ fun Abs(
                 .clickable { onClick() })
         }
 
-        Box(
-            modifier = Modifier
-                .offset(x = height.times(0.055f), y = -height.times(0.23f))
-                .graphicsLayer {
-                    rotationY = 180f
-                }
-        ) {
+        Box(modifier = Modifier
+            .offset(x = height.times(0.055f), y = -height.times(0.23f))
+            .graphicsLayer {
+                rotationY = 180f
+            }) {
 
             Box(modifier = Modifier
                 .size(height.div(9f), height.div(9f))
@@ -1345,8 +1227,7 @@ fun Abs(
     }
 
     Box(
-        modifier = Modifier
-            .offset(x = height.times(0f), y = -height.times(0.1f))
+        modifier = Modifier.offset(x = height.times(0f), y = -height.times(0.1f))
     ) {
 
         Box(modifier = Modifier
@@ -1367,13 +1248,11 @@ fun FrontForeArm(
 ) {
 
 
-    Box(
-        modifier = Modifier
-            .offset(x = -height.times(0.29f), y = -height.times(0.24f))
-            .graphicsLayer {
-                rotationZ = 5f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = -height.times(0.29f), y = -height.times(0.24f))
+        .graphicsLayer {
+            rotationZ = 5f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(8f), height.div(3f))
@@ -1386,14 +1265,12 @@ fun FrontForeArm(
     }
 
 
-    Box(
-        modifier = Modifier
-            .offset(x = height.times(0.29f), y = -height.times(0.24f))
-            .graphicsLayer {
-                rotationZ = 5f
-                rotationY = 180f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = height.times(0.29f), y = -height.times(0.24f))
+        .graphicsLayer {
+            rotationZ = 5f
+            rotationY = 180f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(8f), height.div(3f))
@@ -1405,13 +1282,11 @@ fun FrontForeArm(
             .clickable { onClick() })
     }
 
-    Box(
-        modifier = Modifier
-            .offset(x = height.times(0.35f), y = -height.times(0.24f))
-            .graphicsLayer {
-                rotationZ = 5f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = height.times(0.35f), y = -height.times(0.24f))
+        .graphicsLayer {
+            rotationZ = 5f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(8f), height.div(3f))
@@ -1423,14 +1298,12 @@ fun FrontForeArm(
             .clickable { onClick() })
     }
 
-    Box(
-        modifier = Modifier
-            .offset(x = -height.times(0.35f), y = -height.times(0.24f))
-            .graphicsLayer {
-                rotationZ = 5f
-                rotationY = 180f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = -height.times(0.35f), y = -height.times(0.24f))
+        .graphicsLayer {
+            rotationZ = 5f
+            rotationY = 180f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(8f), height.div(3f))
@@ -1449,13 +1322,11 @@ fun FrontBicep(
     height: Dp, color: Color, onClick: () -> Unit
 ) {
 
-    Box(
-        modifier = Modifier
-            .offset(x = -height.times(0.26f), y = -height.times(0.44f))
-            .graphicsLayer {
-                rotationZ = 5f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = -height.times(0.26f), y = -height.times(0.44f))
+        .graphicsLayer {
+            rotationZ = 5f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(8f), height.div(4f))
@@ -1467,14 +1338,12 @@ fun FrontBicep(
             .clickable { onClick() })
     }
 
-    Box(
-        modifier = Modifier
-            .offset(x = height.times(0.26f), y = -height.times(0.44f))
-            .graphicsLayer {
-                rotationZ = 5f
-                rotationY = 180f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = height.times(0.26f), y = -height.times(0.44f))
+        .graphicsLayer {
+            rotationZ = 5f
+            rotationY = 180f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(8f), height.div(4f))
@@ -1486,13 +1355,11 @@ fun FrontBicep(
             .clickable { onClick() })
     }
 
-    Box(
-        modifier = Modifier
-            .offset(x = -height.times(0.24f), y = -height.times(0.41f))
-            .graphicsLayer {
-                rotationZ = -6f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = -height.times(0.24f), y = -height.times(0.41f))
+        .graphicsLayer {
+            rotationZ = -6f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(8f), height.div(3.5f))
@@ -1504,14 +1371,12 @@ fun FrontBicep(
             .clickable { onClick() })
     }
 
-    Box(
-        modifier = Modifier
-            .offset(x = height.times(0.24f), y = -height.times(0.41f))
-            .graphicsLayer {
-                rotationZ = -6f
-                rotationY = 180f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = height.times(0.24f), y = -height.times(0.41f))
+        .graphicsLayer {
+            rotationZ = -6f
+            rotationY = 180f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(8f), height.div(3.5f))
@@ -1531,13 +1396,11 @@ fun FrontTricep(
     height: Dp, color: Color, onClick: () -> Unit
 ) {
 
-    Box(
-        modifier = Modifier
-            .offset(x = height.times(0.28f), y = -height.times(0.42f))
-            .graphicsLayer {
-                rotationZ = 22f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = height.times(0.28f), y = -height.times(0.42f))
+        .graphicsLayer {
+            rotationZ = 22f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(6f), height.div(6f))
@@ -1549,14 +1412,12 @@ fun FrontTricep(
             .clickable { onClick() })
     }
 
-    Box(
-        modifier = Modifier
-            .offset(x = -height.times(0.28f), y = -height.times(0.42f))
-            .graphicsLayer {
-                rotationZ = 22f
-                rotationY = 180f
-            }
-    ) {
+    Box(modifier = Modifier
+        .offset(x = -height.times(0.28f), y = -height.times(0.42f))
+        .graphicsLayer {
+            rotationZ = 22f
+            rotationY = 180f
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(6f), height.div(6f))
@@ -1569,12 +1430,11 @@ fun FrontTricep(
     }
 
 
-    Box(
-        modifier = Modifier
-            .offset(x = height.times(0.23f), y = -height.times(0.38f))
-            .graphicsLayer {
-                rotationZ = 22f
-            }
+    Box(modifier = Modifier
+        .offset(x = height.times(0.23f), y = -height.times(0.38f))
+        .graphicsLayer {
+            rotationZ = 22f
+        }
 
     ) {
 
@@ -1589,13 +1449,12 @@ fun FrontTricep(
     }
 
 
-    Box(
-        modifier = Modifier
-            .offset(x = -height.times(0.23f), y = -height.times(0.38f))
-            .graphicsLayer {
-                rotationZ = 22f
-                rotationY = 180f
-            }
+    Box(modifier = Modifier
+        .offset(x = -height.times(0.23f), y = -height.times(0.38f))
+        .graphicsLayer {
+            rotationZ = 22f
+            rotationY = 180f
+        }
 
     ) {
 
@@ -1652,8 +1511,7 @@ fun FrontDelt(
 ) {
 
     Box(
-        modifier = Modifier
-            .offset(x = -height.times(0.19f), y = -height.times(0.56f))
+        modifier = Modifier.offset(x = -height.times(0.19f), y = -height.times(0.56f))
     ) {
 
         Box(modifier = Modifier
@@ -1670,8 +1528,7 @@ fun FrontDelt(
         .offset(x = height.times(0.19f), y = -height.times(0.56f))
         .graphicsLayer {
             rotationY = 180f
-        }
-    ) {
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(5f), height.div(5f))
@@ -1690,8 +1547,7 @@ fun SideDelt(
 ) {
 
     Box(
-        modifier = Modifier
-            .offset(x = -height.times(0.21f), y = -height.times(0.58f))
+        modifier = Modifier.offset(x = -height.times(0.21f), y = -height.times(0.58f))
     ) {
 
         Box(modifier = Modifier
@@ -1708,8 +1564,7 @@ fun SideDelt(
         .offset(x = height.times(0.21f), y = -height.times(0.58f))
         .graphicsLayer {
             rotationY = 180f
-        }
-    ) {
+        }) {
 
         Box(modifier = Modifier
             .size(height.div(5.5f), height.div(5f))
