@@ -13,11 +13,8 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -36,8 +33,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.skydev.gymexercise.ui.theme.Cordovan
-import com.skydev.gymexercise.ui.theme.Melon
-import com.skydev.gymexercise.ui.theme.Purple40
 import com.skydev.gymexercise.ui.theme.Rose
 
 data class FrontMuscleSelectorState(
@@ -52,7 +47,7 @@ enum class MuscleGroups {
 }
 
 @Composable
-fun rememberFrontMuscleSelectorState(
+fun rememberMuscleSelectorState(
     initialSelected: Set<MuscleGroups> = setOf()
 ): FrontMuscleSelectorState {
     val selected = remember { mutableStateOf(initialSelected) }
@@ -70,9 +65,9 @@ fun rememberFrontMuscleSelectorState(
         { muscle: MuscleGroups ->
             if (selected.value.contains(muscle)) Brush.radialGradient(
                 listOf(
-                    Cordovan, Purple40
+                    Cordovan, Rose
                 )
-            ) else Brush.radialGradient(listOf(Color.LightGray, Color.DarkGray))
+            ) else Brush.radialGradient(listOf(Color.LightGray, Color.Gray))
         }
     }
 
@@ -82,7 +77,7 @@ fun rememberFrontMuscleSelectorState(
 @Composable
 fun MuscleSelector(
     modifier: Modifier = Modifier,
-    state: FrontMuscleSelectorState = rememberFrontMuscleSelectorState()
+    state: FrontMuscleSelectorState = rememberMuscleSelectorState()
 ) {
     Box(
         modifier = modifier, contentAlignment = Alignment.Center
@@ -94,95 +89,11 @@ fun MuscleSelector(
                 .size(state.height)
                 .aspectRatio(0.5f)
                 .clip(ShapePath(pathHuman))
-                .background(Melon)
+                .background(Color.DarkGray)
                 .clickable { },
         )
 
-        var chest by remember {
-            mutableStateOf(false)
-        }
-        val chestColor by remember {
-            derivedStateOf {
-                if (chest) Color.Cyan else Color.Gray
-            }
-        }
 
-        var frontDelt by remember {
-            mutableStateOf(false)
-        }
-        val frontDeltColor by remember {
-            derivedStateOf {
-                if (frontDelt) Color.Red else Color.Gray
-            }
-        }
-
-
-        var sideDelt by remember {
-            mutableStateOf(false)
-        }
-        val sideDeltColor by remember {
-            derivedStateOf {
-                if (sideDelt) Color.Green else Color.Gray
-            }
-        }
-
-        var frontBicep by remember {
-            mutableStateOf(false)
-        }
-        val frontBicepColor by remember {
-            derivedStateOf {
-                if (frontBicep) Color.Magenta else Color.Gray
-            }
-        }
-
-
-        var frontTricep by remember {
-            mutableStateOf(false)
-        }
-        val frontTricepColor by remember {
-            derivedStateOf {
-                if (frontTricep) Color.Blue else Color.Gray
-            }
-        }
-
-
-        var frontForearm by remember {
-            mutableStateOf(false)
-        }
-        val frontForearmColor by remember {
-            derivedStateOf {
-                if (frontForearm) Color.Yellow else Color.Gray
-            }
-        }
-
-
-        var abs by remember {
-            mutableStateOf(false)
-        }
-        val absColor by remember {
-            derivedStateOf {
-                if (abs) Color.Red else Color.Gray
-            }
-        }
-
-
-        var oblique by remember {
-            mutableStateOf(false)
-        }
-        val obliqueColor by remember {
-            derivedStateOf {
-                if (oblique) Color.Green else Color.Gray
-            }
-        }
-
-        var frontNeck by remember {
-            mutableStateOf(false)
-        }
-        val frontNeckColor by remember {
-            derivedStateOf {
-                if (frontNeck) Color.Yellow else Color.Gray
-            }
-        }
 
         FrontNeck(
             height = state.height, color = state.getColor(MuscleGroups.NECK)
@@ -198,65 +109,76 @@ fun MuscleSelector(
 
 
         SideDelt(
-            height = state.height, color = sideDeltColor
+            height = state.height, color = state.getColor(MuscleGroups.SIDE_DELTOID)
         ) {
-            sideDelt = !sideDelt
+            state.selectionToggle(MuscleGroups.SIDE_DELTOID)
         }
 
         FrontDelt(
-            height = state.height, color = frontDeltColor
+            height = state.height, color = state.getColor(MuscleGroups.FRONT_DELTOID)
         ) {
-            frontDelt = !frontDelt
+            state.selectionToggle(MuscleGroups.FRONT_DELTOID)
         }
 
         FrontTricep(
-            height = state.height, color = frontTricepColor
+            height = state.height, color = state.getColor(MuscleGroups.TRICEP)
         ) {
-            frontTricep = !frontTricep
+            state.selectionToggle(MuscleGroups.TRICEP)
         }
 
         FrontForeArm(
-            height = state.height, color = frontForearmColor
+            height = state.height, color = state.getColor(MuscleGroups.FOREARM)
         ) {
-            frontForearm = !frontForearm
+            state.selectionToggle(MuscleGroups.FOREARM)
         }
 
-        FrontBicep(height = state.height, color = frontBicepColor) {
-            frontBicep = !frontBicep
-        }
-
-        Abs(
-            height = state.height, color = absColor
-        ) {
-            abs = !abs
-        }
-
-        Oblique(
-            height = state.height, color = obliqueColor
-        ) {
-            oblique = !oblique
+        FrontBicep(height = state.height, color = state.getColor(MuscleGroups.BICEP)) {
+            state.selectionToggle(MuscleGroups.BICEP)
         }
 
         FrontLegs(
-            height = state.height, color = frontDeltColor
-        ) { }
+            height = state.height, state
+        )
+
+        Abs(
+            height = state.height, color = state.getColor(MuscleGroups.ABS)
+        ) {
+            state.selectionToggle(MuscleGroups.ABS)
+        }
+
+        Oblique(
+            height = state.height, color = state.getColor(MuscleGroups.OBLIQUE)
+        ) {
+            state.selectionToggle(MuscleGroups.OBLIQUE)
+        }
+
     }
 
 }
 
 @Composable
 fun FrontLegs(
-    height: Dp, color: Color, onClick: () -> Unit
+    height: Dp, state: FrontMuscleSelectorState
 ) {
-    AbductorAndHipFlexor(height = height, color) { onClick() }
-    Adductor(height, color, onClick)
-    Quads(height, color) { onClick() }
-    Calves(height, color, onClick)
+    AbductorAndHipFlexor(
+        height = height, state.getColor(MuscleGroups.ABDUCTOR)
+    ) { state.selectionToggle(MuscleGroups.ABDUCTOR) }
+    Adductor(height = height, state.getColor(MuscleGroups.ADDUCTOR)) {
+        state.selectionToggle(
+            MuscleGroups.ADDUCTOR
+        )
+    }
+    Quads(
+        height = height, state.getColor(MuscleGroups.QUADS)
+    ) { state.selectionToggle(MuscleGroups.QUADS) }
+    Calves(
+        height = height, state.getColor(MuscleGroups.CALF)
+    ) { state.selectionToggle(MuscleGroups.CALF) }
 }
 
 @Composable
 fun Calves(
-    height: Dp, color: Color, onClick: () -> Unit
+    height: Dp, color: Brush, onClick: () -> Unit
 ) {
 
     Box(modifier = Modifier
@@ -395,7 +317,7 @@ fun Calves(
 
 @Composable
 fun Adductor(
-    height: Dp, color: Color, onClick: () -> Unit
+    height: Dp, color: Brush, onClick: () -> Unit
 ) {
 
     Box(modifier = Modifier
@@ -470,7 +392,7 @@ fun Adductor(
 
 @Composable
 fun Quads(
-    height: Dp, color: Color, onClick: () -> Unit
+    height: Dp, color: Brush, onClick: () -> Unit
 ) {
 
     Box(modifier = Modifier
@@ -651,7 +573,7 @@ fun Quads(
 
 @Composable
 fun AbductorAndHipFlexor(
-    height: Dp, color: Color, onClick: () -> Unit
+    height: Dp, color: Brush, onClick: () -> Unit
 ) {
     Box(modifier = Modifier
         .offset(x = -height.times(0.162f), y = -height.times(0.115f))
@@ -757,313 +679,287 @@ fun FrontNeck(
 }
 
 @Composable
-fun BoxScope.Oblique(
-    height: Dp, color: Color, onClick: () -> Unit
+fun Oblique(
+    height: Dp, color: Brush, onClick: () -> Unit
 ) {
 
-    Box(modifier = Modifier.align(Alignment.Center)) {
-
+    Box(modifier = Modifier
+        .offset(x = -height.times(0.13f), y = -height.times(0.25f))
+        .graphicsLayer {}) {
         Box(modifier = Modifier
-            .offset(x = -height.times(0.18f), y = -height.times(0.38f))
-            .graphicsLayer {
-                rotationZ = 94f
-                rotationX = 180f
-            }) {
-
-            Box(modifier = Modifier
-                .size(height.div(6f), height.div(30f))
-                .clip(ShapePath(oblique1))
-                .border(
-                    shape = ShapePath(oblique1), color = Color.LightGray, width = 1.dp
-                )
-                .background(color)
-                .clickable { onClick() })
-        }
-
-
-        Box(modifier = Modifier
-            .offset(x = -height.times(0.085f), y = -height.times(0.36f))
-            .graphicsLayer {}) {
-
-            Box(modifier = Modifier
-                .size(height.div(10f), height.div(18f))
-                .clip(ShapePath(oblique2))
-                .border(
-                    shape = ShapePath(oblique2), color = Color.LightGray, width = 1.dp
-                )
-                .background(color)
-                .clickable { onClick() })
-        }
-
-        Box(modifier = Modifier
-            .offset(x = -height.times(0.085f), y = -height.times(0.33f))
-            .graphicsLayer {}) {
-
-            Box(modifier = Modifier
-                .size(height.div(14f), height.div(20f))
-                .clip(ShapePath(oblique3))
-                .border(
-                    shape = ShapePath(oblique3), color = Color.LightGray, width = 1.dp
-                )
-                .background(color)
-                .clickable { onClick() })
-        }
-
-
-        Box(modifier = Modifier
-            .offset(x = -height.times(0.085f), y = -height.times(0.31f))
-            .graphicsLayer {}) {
-
-            Box(modifier = Modifier
-                .size(height.div(20f), height.div(20f))
-                .clip(ShapePath(oblique4))
-                .border(
-                    shape = ShapePath(oblique4), color = Color.LightGray, width = 1.dp
-                )
-                .background(color)
-                .clickable { onClick() })
-        }
-
-
-        Box(modifier = Modifier
-            .offset(x = -height.times(0.075f), y = -height.times(0.26f))
-            .graphicsLayer {}) {
-
-            Box(modifier = Modifier
-                .size(height.div(22f), height.div(20f))
-                .clip(ShapePath(oblique4))
-                .border(
-                    shape = ShapePath(oblique4), color = Color.LightGray, width = 1.dp
-                )
-                .background(color)
-                .clickable { onClick() })
-        }
-
-
-        Box(modifier = Modifier
-            .offset(x = -height.times(0.075f), y = -height.times(0.28f))
-            .graphicsLayer {}) {
-
-            Box(modifier = Modifier
-                .size(height.div(20f), height.div(20f))
-                .clip(ShapePath(oblique5))
-                .border(
-                    shape = ShapePath(oblique5), color = Color.LightGray, width = 1.dp
-                )
-                .background(color)
-                .clickable { onClick() })
-        }
-
-        Box(modifier = Modifier
-            .offset(x = -height.times(0.07f), y = -height.times(0.22f))
-            .graphicsLayer {}) {
-
-            Box(modifier = Modifier
-                .size(height.div(24f), height.div(20f))
-                .clip(ShapePath(oblique6))
-                .border(
-                    shape = ShapePath(oblique6), color = Color.LightGray, width = 1.dp
-                )
-                .background(color)
-                .clickable { onClick() })
-        }
-
-
-        Box(modifier = Modifier
-            .offset(x = -height.times(0.07f), y = -height.times(0.20f))
-            .graphicsLayer {}) {
-
-            Box(modifier = Modifier
-                .size(height.div(20f), height.div(12f))
-                .clip(ShapePath(oblique7))
-                .border(
-                    shape = ShapePath(oblique7), color = Color.LightGray, width = 1.dp
-                )
-                .background(color)
-                .clickable { onClick() })
-        }
-
-
-        Box(modifier = Modifier
-            .offset(x = -height.times(0.072f), y = -height.times(0.16f))
-            .graphicsLayer {}) {
-
-            Box(modifier = Modifier
-                .size(height.div(14f), height.div(5f))
-                .clip(ShapePath(oblique8))
-                .border(
-                    shape = ShapePath(oblique8), color = Color.LightGray, width = 1.dp
-                )
-                .background(color)
-                .clickable { onClick() })
-        }
-
+            .size(height.div(24f), height.div(20f))
+            .clip(ShapePath(oblique6))
+            .border(
+                shape = ShapePath(oblique6), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
     }
 
-    //reflection
-    Box(
-        modifier = Modifier
-            .align(Alignment.Center)
-            .offset(y = -height.times(0.07f)),
-        contentAlignment = Alignment.CenterEnd
-    ) {
 
+    Box(modifier = Modifier
+        .offset(x = -height.times(0.13f), y = -height.times(0.22f))
+        .graphicsLayer {}) {
         Box(modifier = Modifier
-            .offset(x = height.times(0.18f), y = -height.times(0.38f))
-            .graphicsLayer {
-                rotationZ = 94f
-                rotationX = 180f
-                rotationY = 180f
-            }) {
-
-            Box(modifier = Modifier
-                .size(height.div(6f), height.div(30f))
-                .clip(ShapePath(oblique1))
-                .border(
-                    shape = ShapePath(oblique1), color = Color.LightGray, width = 1.dp
-                )
-                .background(color)
-                .clickable { onClick() })
-        }
+            .size(height.div(20f), height.div(12f))
+            .clip(ShapePath(oblique7))
+            .border(
+                shape = ShapePath(oblique7), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
 
 
+    Box(modifier = Modifier
+        .offset(x = -height.times(0.12f), y = -height.times(0.14f))
+        .graphicsLayer {}) {
         Box(modifier = Modifier
-            .offset(x = height.times(0.085f), y = -height.times(0.36f))
-            .graphicsLayer {
-                rotationY = 180f
-            }) {
+            .size(height.div(14f), height.div(5f))
+            .clip(ShapePath(oblique8))
+            .border(
+                shape = ShapePath(oblique8), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
 
-            Box(modifier = Modifier
-                .size(height.div(10f), height.div(18f))
-                .clip(ShapePath(oblique2))
-                .border(
-                    shape = ShapePath(oblique2), color = Color.LightGray, width = 1.dp
-                )
-                .background(color)
-                .clickable { onClick() })
-        }
 
+    Box(modifier = Modifier
+        .offset(x = height.times(0.13f), y = -height.times(0.25f))
+        .graphicsLayer {
+            rotationY = 180f
+        }) {
         Box(modifier = Modifier
-            .offset(x = height.times(0.085f), y = -height.times(0.33f))
-            .graphicsLayer {
-                rotationY = 180f
-            }) {
-
-            Box(modifier = Modifier
-                .size(height.div(14f), height.div(20f))
-                .clip(ShapePath(oblique3))
-                .border(
-                    shape = ShapePath(oblique3), color = Color.LightGray, width = 1.dp
-                )
-                .background(color)
-                .clickable { onClick() })
-        }
+            .size(height.div(24f), height.div(20f))
+            .clip(ShapePath(oblique6))
+            .border(
+                shape = ShapePath(oblique6), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
 
 
+    Box(modifier = Modifier
+        .offset(x = height.times(0.13f), y = -height.times(0.22f))
+        .graphicsLayer {
+            rotationY = 180f
+        }) {
         Box(modifier = Modifier
-            .offset(x = height.times(0.085f), y = -height.times(0.30f))
-            .graphicsLayer {
-                rotationY = 180f
-            }) {
-
-            Box(modifier = Modifier
-                .size(height.div(20f), height.div(20f))
-                .clip(ShapePath(oblique4))
-                .border(
-                    shape = ShapePath(oblique4), color = Color.LightGray, width = 1.dp
-                )
-                .background(color)
-                .clickable { onClick() })
-        }
+            .size(height.div(20f), height.div(12f))
+            .clip(ShapePath(oblique7))
+            .border(
+                shape = ShapePath(oblique7), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
 
 
+    Box(modifier = Modifier
+        .offset(x = height.times(0.12f), y = -height.times(0.14f))
+        .graphicsLayer {
+            rotationY = 180f
+        }) {
         Box(modifier = Modifier
-            .offset(x = height.times(0.075f), y = -height.times(0.25f))
-            .graphicsLayer {
-                rotationY = 180f
-            }) {
+            .size(height.div(14f), height.div(5f))
+            .clip(ShapePath(oblique8))
+            .border(
+                shape = ShapePath(oblique8), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
 
-            Box(modifier = Modifier
-                .size(height.div(22f), height.div(20f))
-                .clip(ShapePath(oblique4))
-                .border(
-                    shape = ShapePath(oblique4), color = Color.LightGray, width = 1.dp
-                )
-                .background(color)
-                .clickable { onClick() })
-        }
-
-
+    Box(modifier = Modifier
+        .offset(x = -height.times(0.13f), y = -height.times(0.31f))
+        .graphicsLayer {}) {
         Box(modifier = Modifier
-            .offset(x = height.times(0.075f), y = -height.times(0.27f))
-            .graphicsLayer {
-                rotationY = 180f
-            }) {
+            .size(height.div(30f), height.div(20f))
+            .clip(ShapePath(oblique4))
+            .border(
+                shape = ShapePath(oblique4), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
 
-            Box(modifier = Modifier
-                .size(height.div(20f), height.div(20f))
-                .clip(ShapePath(oblique5))
-                .border(
-                    shape = ShapePath(oblique5), color = Color.LightGray, width = 1.dp
-                )
-                .background(color)
-                .clickable { onClick() })
-        }
 
+
+    Box(modifier = Modifier
+        .offset(x = -height.times(0.13f), y = -height.times(0.28f))
+        .graphicsLayer {}) {
         Box(modifier = Modifier
-            .offset(x = height.times(0.07f), y = -height.times(0.21f))
-            .graphicsLayer {
-                rotationY = 180f
-            }) {
+            .size(height.div(26f), height.div(20f))
+            .clip(ShapePath(oblique5))
+            .border(
+                shape = ShapePath(oblique5), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
 
-            Box(modifier = Modifier
-                .size(height.div(24f), height.div(20f))
-                .clip(ShapePath(oblique6))
-                .border(
-                    shape = ShapePath(oblique6), color = Color.LightGray, width = 1.dp
-                )
-                .background(color)
-                .clickable { onClick() })
-        }
-
-
+    Box(modifier = Modifier
+        .offset(x = height.times(0.13f), y = -height.times(0.31f))
+        .graphicsLayer {
+            rotationY = 180f
+        }) {
         Box(modifier = Modifier
-            .offset(x = height.times(0.07f), y = -height.times(0.18f))
-            .graphicsLayer {
-                rotationY = 180f
-            }) {
+            .size(height.div(30f), height.div(20f))
+            .clip(ShapePath(oblique4))
+            .border(
+                shape = ShapePath(oblique4), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
 
-            Box(modifier = Modifier
-                .size(height.div(20f), height.div(12f))
-                .clip(ShapePath(oblique7))
-                .border(
-                    shape = ShapePath(oblique7), color = Color.LightGray, width = 1.dp
-                )
-                .background(color)
-                .clickable { onClick() })
-        }
 
+
+    Box(modifier = Modifier
+        .offset(x = height.times(0.13f), y = -height.times(0.28f))
+        .graphicsLayer {
+            rotationY = 180f
+        }) {
         Box(modifier = Modifier
-            .offset(x = height.times(0.072f), y = -height.times(0.09f))
-            .graphicsLayer {
-                rotationY = 180f
-            }) {
+            .size(height.div(26f), height.div(20f))
+            .clip(ShapePath(oblique5))
+            .border(
+                shape = ShapePath(oblique5), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
 
-            Box(modifier = Modifier
-                .size(height.div(14f), height.div(5f))
-                .clip(ShapePath(oblique8))
-                .border(
-                    shape = ShapePath(oblique8), color = Color.LightGray, width = 1.dp
-                )
-                .background(color)
-                .clickable { onClick() })
-        }
+
+
+
+    Box(modifier = Modifier
+        .offset(x = -height.times(0.13f), y = -height.times(0.34f))
+        .graphicsLayer {}) {
+        Box(modifier = Modifier
+            .size(height.div(20f), height.div(20f))
+            .clip(ShapePath(oblique4))
+            .border(
+                shape = ShapePath(oblique4), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+    Box(modifier = Modifier
+        .offset(x = -height.times(0.14f), y = -height.times(0.37f))
+        .graphicsLayer {}) {
+        Box(modifier = Modifier
+            .size(height.div(14f), height.div(20f))
+            .clip(ShapePath(oblique3))
+            .border(
+                shape = ShapePath(oblique3), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+
+    Box(modifier = Modifier
+        .offset(x = height.times(0.13f), y = -height.times(0.34f))
+        .graphicsLayer {
+            rotationY = 180f
+        }) {
+        Box(modifier = Modifier
+            .size(height.div(20f), height.div(20f))
+            .clip(ShapePath(oblique4))
+            .border(
+                shape = ShapePath(oblique4), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+    Box(modifier = Modifier
+        .offset(x = height.times(0.14f), y = -height.times(0.37f))
+        .graphicsLayer {
+            rotationY = 180f
+        }) {
+        Box(modifier = Modifier
+            .size(height.div(14f), height.div(20f))
+            .clip(ShapePath(oblique3))
+            .border(
+                shape = ShapePath(oblique3), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+
+
+
+    Box(modifier = Modifier
+        .offset(x = -height.times(0.13f), y = -height.times(0.4f))
+        .graphicsLayer {}) {
+        Box(modifier = Modifier
+            .size(height.div(10f), height.div(18f))
+            .clip(ShapePath(oblique2))
+            .border(
+                shape = ShapePath(oblique2), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+    Box(modifier = Modifier
+        .offset(x = height.times(0.13f), y = -height.times(0.4f))
+        .graphicsLayer {
+            rotationY = 180f
+        }) {
+        Box(modifier = Modifier
+            .size(height.div(10f), height.div(18f))
+            .clip(ShapePath(oblique2))
+            .border(
+                shape = ShapePath(oblique2), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+    Box(modifier = Modifier
+        .offset(x = -height.times(0.18f), y = -height.times(0.48f))
+        .graphicsLayer {
+            rotationZ = 94f
+            rotationX = 180f
+        }) {
+        Box(modifier = Modifier
+            .size(height.div(6f), height.div(30f))
+            .clip(ShapePath(oblique1))
+            .border(
+                shape = ShapePath(oblique1), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
+    }
+
+    Box(modifier = Modifier
+        .offset(x = height.times(0.18f), y = -height.times(0.48f))
+        .graphicsLayer {
+            rotationZ = 94f
+            rotationX = 180f
+            rotationY = 180f
+        }) {
+        Box(modifier = Modifier
+            .size(height.div(6f), height.div(30f))
+            .clip(ShapePath(oblique1))
+            .border(
+                shape = ShapePath(oblique1), color = Color.LightGray, width = 1.dp
+            )
+            .background(color)
+            .clickable { onClick() })
     }
 }
 
 @Composable
 fun Abs(
-    height: Dp, color: Color, onClick: () -> Unit
+    height: Dp, color: Brush, onClick: () -> Unit
 ) {
 
     Box {
@@ -1178,7 +1074,7 @@ fun Abs(
 
 @Composable
 fun FrontForeArm(
-    height: Dp, color: Color, onClick: () -> Unit
+    height: Dp, color: Brush, onClick: () -> Unit
 ) {
 
 
@@ -1253,7 +1149,7 @@ fun FrontForeArm(
 
 @Composable
 fun FrontBicep(
-    height: Dp, color: Color, onClick: () -> Unit
+    height: Dp, color: Brush, onClick: () -> Unit
 ) {
 
     Box(modifier = Modifier
@@ -1327,7 +1223,7 @@ fun FrontBicep(
 
 @Composable
 fun FrontTricep(
-    height: Dp, color: Color, onClick: () -> Unit
+    height: Dp, color: Brush, onClick: () -> Unit
 ) {
 
     Box(modifier = Modifier
@@ -1419,6 +1315,9 @@ fun BoxScope.ChestPec(
         Box(modifier = Modifier
             .size(height.div(4.5f), height.div(4.5f))
             .clip(ShapePath(pathChest))
+            .border(
+                shape = ShapePath(pathChest), color = Color.LightGray, width = 1.dp
+            )
             .background(color)
             .clickable { onClick() })
     }
@@ -1433,6 +1332,9 @@ fun BoxScope.ChestPec(
         Box(modifier = Modifier
             .size(height.div(4.5f), height.div(4.5f))
             .clip(ShapePath(pathChest))
+            .border(
+                shape = ShapePath(pathChest), color = Color.LightGray, width = 1.dp
+            )
             .background(color)
             .clickable { onClick() })
     }
@@ -1441,7 +1343,7 @@ fun BoxScope.ChestPec(
 
 @Composable
 fun FrontDelt(
-    height: Dp, color: Color, onClick: () -> Unit
+    height: Dp, color: Brush, onClick: () -> Unit
 ) {
 
     Box(
@@ -1477,7 +1379,7 @@ fun FrontDelt(
 
 @Composable
 fun SideDelt(
-    height: Dp, color: Color, onClick: () -> Unit
+    height: Dp, color: Brush, onClick: () -> Unit
 ) {
 
     Box(
