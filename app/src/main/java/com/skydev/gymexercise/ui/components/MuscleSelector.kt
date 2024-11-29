@@ -32,8 +32,6 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import com.skydev.gymexercise.ui.theme.Cordovan
-import com.skydev.gymexercise.ui.theme.Rose
 
 data class FrontMuscleSelectorState(
     val selected: Set<MuscleGroups>,
@@ -45,6 +43,7 @@ data class FrontMuscleSelectorState(
 enum class MuscleGroups {
     NECK, SIDE_DELTOID, FRONT_DELTOID, CHEST, OBLIQUE, ABS, BICEP, TRICEP, FOREARM, WRIST_FLAXOR, ABDUCTOR, ADDUCTOR, HIP_FLAXOR, QUADS, CALF
 }
+
 
 @Composable
 fun rememberMuscleSelectorState(
@@ -64,10 +63,33 @@ fun rememberMuscleSelectorState(
     val getColor: (MuscleGroups) -> Brush = remember {
         { muscle: MuscleGroups ->
             if (selected.value.contains(muscle)) Brush.radialGradient(
-                listOf(
-                    Cordovan, Rose
-                )
-            ) else Brush.radialGradient(listOf(Color.LightGray, Color.Gray))
+                colors = listOf(
+                    Color(0xFFcc3f0c),
+                    Color(0xFF5efc8d),
+                ), radius = if (listOf(
+                        MuscleGroups.QUADS, MuscleGroups.HIP_FLAXOR, MuscleGroups.CALF
+                    ).contains(muscle)
+                ) 200f else 75f
+            ) else {
+                if (listOf(
+                        MuscleGroups.QUADS, MuscleGroups.HIP_FLAXOR, MuscleGroups.CALF
+                    ).contains(muscle)
+                ) {
+                    Brush.radialGradient(
+                        listOf(
+                            Color(0xFFf0a6ca),
+                            Color(0xFF870846),
+                        ), radius = 100f
+                    )
+                } else {
+                    Brush.radialGradient(
+                        listOf(
+                            Color(0xFFf0a6ca),
+                            Color(0xFF870846),
+                        )
+                    )
+                }
+            }
         }
     }
 
@@ -76,8 +98,7 @@ fun rememberMuscleSelectorState(
 
 @Composable
 fun MuscleSelector(
-    modifier: Modifier = Modifier,
-    state: FrontMuscleSelectorState = rememberMuscleSelectorState()
+    modifier: Modifier = Modifier, state: FrontMuscleSelectorState = rememberMuscleSelectorState()
 ) {
     Box(
         modifier = modifier, contentAlignment = Alignment.Center
@@ -191,7 +212,7 @@ fun Calves(
             .size(height.div(24f), height.div(2.2f))
             .clip(ShapePath(calf4))
             .border(
-                shape = ShapePath(calf4), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(calf4), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -206,7 +227,7 @@ fun Calves(
             .size(height.div(12f), height.div(2.2f))
             .clip(ShapePath(calf3))
             .border(
-                shape = ShapePath(calf3), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(calf3), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -222,7 +243,7 @@ fun Calves(
             .size(height.div(12f), height.div(2.2f))
             .clip(ShapePath(calf2))
             .border(
-                shape = ShapePath(calf2), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(calf2), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -238,7 +259,7 @@ fun Calves(
             .size(height.div(12f), height.div(2f))
             .clip(ShapePath(calf1))
             .border(
-                shape = ShapePath(calf1), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(calf1), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -256,7 +277,7 @@ fun Calves(
             .size(height.div(24f), height.div(2.2f))
             .clip(ShapePath(calf4))
             .border(
-                shape = ShapePath(calf4), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(calf4), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -272,7 +293,7 @@ fun Calves(
             .size(height.div(12f), height.div(2.2f))
             .clip(ShapePath(calf3))
             .border(
-                shape = ShapePath(calf3), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(calf3), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -289,7 +310,7 @@ fun Calves(
             .size(height.div(12f), height.div(2.2f))
             .clip(ShapePath(calf2))
             .border(
-                shape = ShapePath(calf2), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(calf2), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -306,7 +327,7 @@ fun Calves(
             .size(height.div(12f), height.div(2f))
             .clip(ShapePath(calf1))
             .border(
-                shape = ShapePath(calf1), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(calf1), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -330,7 +351,7 @@ fun Adductor(
             .size(height.div(32f), height.div(5f))
             .clip(ShapePath(adductor1))
             .border(
-                shape = ShapePath(adductor1), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(adductor1), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -347,7 +368,7 @@ fun Adductor(
             .size(height.div(32f), height.div(5f))
             .clip(ShapePath(adductor2))
             .border(
-                shape = ShapePath(adductor2), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(adductor2), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -364,7 +385,7 @@ fun Adductor(
             .size(height.div(32f), height.div(5f))
             .clip(ShapePath(adductor1))
             .border(
-                shape = ShapePath(adductor1), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(adductor1), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -382,7 +403,7 @@ fun Adductor(
             .size(height.div(32f), height.div(5f))
             .clip(ShapePath(adductor2))
             .border(
-                shape = ShapePath(adductor2), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(adductor2), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -405,7 +426,7 @@ fun Quads(
             .size(height.div(12f), height.div(4f))
             .clip(ShapePath(quad1))
             .border(
-                shape = ShapePath(quad1), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(quad1), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -422,7 +443,7 @@ fun Quads(
             .size(height.div(12f), height.div(2.2f))
             .clip(ShapePath(quad2))
             .border(
-                shape = ShapePath(quad2), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(quad2), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -439,7 +460,7 @@ fun Quads(
             .size(height.div(10f), height.div(2f))
             .clip(ShapePath(quad3))
             .border(
-                shape = ShapePath(quad3), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(quad3), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -456,7 +477,7 @@ fun Quads(
             .size(height.div(23f), height.div(3f))
             .clip(ShapePath(quad4))
             .border(
-                shape = ShapePath(quad4), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(quad4), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -474,7 +495,7 @@ fun Quads(
             .size(height.div(12f), height.div(4f))
             .clip(ShapePath(quad1))
             .border(
-                shape = ShapePath(quad1), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(quad1), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -492,7 +513,7 @@ fun Quads(
             .size(height.div(12f), height.div(2.2f))
             .clip(ShapePath(quad2))
             .border(
-                shape = ShapePath(quad2), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(quad2), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -510,7 +531,7 @@ fun Quads(
             .size(height.div(10f), height.div(2f))
             .clip(ShapePath(quad3))
             .border(
-                shape = ShapePath(quad3), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(quad3), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -528,7 +549,7 @@ fun Quads(
             .size(height.div(23f), height.div(3f))
             .clip(ShapePath(quad4))
             .border(
-                shape = ShapePath(quad4), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(quad4), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -545,7 +566,7 @@ fun Quads(
             .size(height.div(9f), height.div(2.7f))
             .clip(ShapePath(sartorius))
             .border(
-                shape = ShapePath(sartorius), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(sartorius), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -563,7 +584,7 @@ fun Quads(
             .size(height.div(9f), height.div(2.7f))
             .clip(ShapePath(sartorius))
             .border(
-                shape = ShapePath(sartorius), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(sartorius), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -585,7 +606,7 @@ fun AbductorAndHipFlexor(
             .size(height.div(32f), height.div(8f))
             .clip(ShapePath(abductor))
             .border(
-                shape = ShapePath(abductor), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(abductor), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -602,7 +623,7 @@ fun AbductorAndHipFlexor(
             .size(height.div(32f), height.div(8f))
             .clip(ShapePath(abductor))
             .border(
-                shape = ShapePath(abductor), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(abductor), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -617,7 +638,7 @@ fun AbductorAndHipFlexor(
             .size(height.div(20f), height.div(4f))
             .clip(ShapePath(hipFlexor))
             .border(
-                shape = ShapePath(hipFlexor), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(hipFlexor), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -633,7 +654,7 @@ fun AbductorAndHipFlexor(
             .size(height.div(20f), height.div(4f))
             .clip(ShapePath(hipFlexor))
             .border(
-                shape = ShapePath(hipFlexor), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(hipFlexor), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -655,7 +676,7 @@ fun FrontNeck(
             .size(height.div(12f), height.div(8f))
             .clip(ShapePath(frontNeck))
             .border(
-                shape = ShapePath(frontNeck), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(frontNeck), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -671,7 +692,7 @@ fun FrontNeck(
             .size(height.div(12f), height.div(8f))
             .clip(ShapePath(frontNeck))
             .border(
-                shape = ShapePath(frontNeck), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(frontNeck), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -690,7 +711,7 @@ fun Oblique(
             .size(height.div(24f), height.div(20f))
             .clip(ShapePath(oblique6))
             .border(
-                shape = ShapePath(oblique6), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(oblique6), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -704,7 +725,7 @@ fun Oblique(
             .size(height.div(20f), height.div(12f))
             .clip(ShapePath(oblique7))
             .border(
-                shape = ShapePath(oblique7), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(oblique7), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -718,7 +739,7 @@ fun Oblique(
             .size(height.div(14f), height.div(5f))
             .clip(ShapePath(oblique8))
             .border(
-                shape = ShapePath(oblique8), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(oblique8), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -734,7 +755,7 @@ fun Oblique(
             .size(height.div(24f), height.div(20f))
             .clip(ShapePath(oblique6))
             .border(
-                shape = ShapePath(oblique6), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(oblique6), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -750,7 +771,7 @@ fun Oblique(
             .size(height.div(20f), height.div(12f))
             .clip(ShapePath(oblique7))
             .border(
-                shape = ShapePath(oblique7), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(oblique7), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -766,7 +787,7 @@ fun Oblique(
             .size(height.div(14f), height.div(5f))
             .clip(ShapePath(oblique8))
             .border(
-                shape = ShapePath(oblique8), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(oblique8), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -779,7 +800,7 @@ fun Oblique(
             .size(height.div(30f), height.div(20f))
             .clip(ShapePath(oblique4))
             .border(
-                shape = ShapePath(oblique4), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(oblique4), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -794,7 +815,7 @@ fun Oblique(
             .size(height.div(26f), height.div(20f))
             .clip(ShapePath(oblique5))
             .border(
-                shape = ShapePath(oblique5), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(oblique5), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -809,7 +830,7 @@ fun Oblique(
             .size(height.div(30f), height.div(20f))
             .clip(ShapePath(oblique4))
             .border(
-                shape = ShapePath(oblique4), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(oblique4), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -826,7 +847,7 @@ fun Oblique(
             .size(height.div(26f), height.div(20f))
             .clip(ShapePath(oblique5))
             .border(
-                shape = ShapePath(oblique5), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(oblique5), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -842,7 +863,7 @@ fun Oblique(
             .size(height.div(20f), height.div(20f))
             .clip(ShapePath(oblique4))
             .border(
-                shape = ShapePath(oblique4), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(oblique4), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -855,7 +876,7 @@ fun Oblique(
             .size(height.div(14f), height.div(20f))
             .clip(ShapePath(oblique3))
             .border(
-                shape = ShapePath(oblique3), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(oblique3), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -871,7 +892,7 @@ fun Oblique(
             .size(height.div(20f), height.div(20f))
             .clip(ShapePath(oblique4))
             .border(
-                shape = ShapePath(oblique4), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(oblique4), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -886,7 +907,7 @@ fun Oblique(
             .size(height.div(14f), height.div(20f))
             .clip(ShapePath(oblique3))
             .border(
-                shape = ShapePath(oblique3), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(oblique3), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -902,7 +923,7 @@ fun Oblique(
             .size(height.div(10f), height.div(18f))
             .clip(ShapePath(oblique2))
             .border(
-                shape = ShapePath(oblique2), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(oblique2), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -917,7 +938,7 @@ fun Oblique(
             .size(height.div(10f), height.div(18f))
             .clip(ShapePath(oblique2))
             .border(
-                shape = ShapePath(oblique2), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(oblique2), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -933,7 +954,7 @@ fun Oblique(
             .size(height.div(6f), height.div(30f))
             .clip(ShapePath(oblique1))
             .border(
-                shape = ShapePath(oblique1), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(oblique1), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -950,7 +971,7 @@ fun Oblique(
             .size(height.div(6f), height.div(30f))
             .clip(ShapePath(oblique1))
             .border(
-                shape = ShapePath(oblique1), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(oblique1), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -972,7 +993,7 @@ fun Abs(
                 .size(height.div(9f), height.div(9f))
                 .clip(ShapePath(abs1))
                 .border(
-                    shape = ShapePath(abs1), color = Color.LightGray, width = 1.dp
+                    shape = ShapePath(abs1), color = Color.DarkGray, width = 1.dp
                 )
                 .background(color)
                 .clickable { onClick() })
@@ -986,7 +1007,7 @@ fun Abs(
                 .size(height.div(9f), height.div(9f))
                 .clip(ShapePath(abs2))
                 .border(
-                    shape = ShapePath(abs2), color = Color.LightGray, width = 1.dp
+                    shape = ShapePath(abs2), color = Color.DarkGray, width = 1.dp
                 )
                 .background(color)
                 .clickable { onClick() })
@@ -1000,7 +1021,7 @@ fun Abs(
                 .size(height.div(9f), height.div(9f))
                 .clip(ShapePath(abs3))
                 .border(
-                    shape = ShapePath(abs3), color = Color.LightGray, width = 1.dp
+                    shape = ShapePath(abs3), color = Color.DarkGray, width = 1.dp
                 )
                 .background(color)
                 .clickable { onClick() })
@@ -1017,7 +1038,7 @@ fun Abs(
                 .size(height.div(9f), height.div(9f))
                 .clip(ShapePath(abs1))
                 .border(
-                    shape = ShapePath(abs1), color = Color.LightGray, width = 1.dp
+                    shape = ShapePath(abs1), color = Color.DarkGray, width = 1.dp
                 )
                 .background(color)
                 .clickable { onClick() })
@@ -1033,7 +1054,7 @@ fun Abs(
                 .size(height.div(9f), height.div(9f))
                 .clip(ShapePath(abs2))
                 .border(
-                    shape = ShapePath(abs2), color = Color.LightGray, width = 1.dp
+                    shape = ShapePath(abs2), color = Color.DarkGray, width = 1.dp
                 )
                 .background(color)
                 .clickable { onClick() })
@@ -1049,7 +1070,7 @@ fun Abs(
                 .size(height.div(9f), height.div(9f))
                 .clip(ShapePath(abs3))
                 .border(
-                    shape = ShapePath(abs3), color = Color.LightGray, width = 1.dp
+                    shape = ShapePath(abs3), color = Color.DarkGray, width = 1.dp
                 )
                 .background(color)
                 .clickable { onClick() })
@@ -1064,7 +1085,7 @@ fun Abs(
             .size(height.div(4.6f), height.div(5f))
             .clip(ShapePath(absBottom))
             .border(
-                shape = ShapePath(absBottom), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(absBottom), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -1088,7 +1109,7 @@ fun FrontForeArm(
             .size(height.div(8f), height.div(3f))
             .clip(ShapePath(wristFlexor))
             .border(
-                shape = ShapePath(wristFlexor), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(wristFlexor), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -1106,7 +1127,7 @@ fun FrontForeArm(
             .size(height.div(8f), height.div(3f))
             .clip(ShapePath(wristFlexor))
             .border(
-                shape = ShapePath(wristFlexor), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(wristFlexor), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -1122,7 +1143,7 @@ fun FrontForeArm(
             .size(height.div(8f), height.div(3f))
             .clip(ShapePath(forearm))
             .border(
-                shape = ShapePath(forearm), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(forearm), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -1139,7 +1160,7 @@ fun FrontForeArm(
             .size(height.div(8f), height.div(3f))
             .clip(ShapePath(forearm))
             .border(
-                shape = ShapePath(forearm), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(forearm), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -1162,7 +1183,7 @@ fun FrontBicep(
             .size(height.div(8f), height.div(4f))
             .clip(ShapePath(bicepMinor))
             .border(
-                shape = ShapePath(bicepMinor), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(bicepMinor), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -1179,7 +1200,7 @@ fun FrontBicep(
             .size(height.div(8f), height.div(4f))
             .clip(ShapePath(bicepMinor))
             .border(
-                shape = ShapePath(bicepMinor), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(bicepMinor), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -1195,7 +1216,7 @@ fun FrontBicep(
             .size(height.div(8f), height.div(3.5f))
             .clip(ShapePath(bicepMajor))
             .border(
-                shape = ShapePath(bicepMajor), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(bicepMajor), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -1212,7 +1233,7 @@ fun FrontBicep(
             .size(height.div(8f), height.div(3.5f))
             .clip(ShapePath(bicepMajor))
             .border(
-                shape = ShapePath(bicepMajor), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(bicepMajor), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -1236,7 +1257,7 @@ fun FrontTricep(
             .size(height.div(6f), height.div(6f))
             .clip(ShapePath(frontTricepBig))
             .border(
-                shape = ShapePath(frontTricepBig), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(frontTricepBig), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -1253,7 +1274,7 @@ fun FrontTricep(
             .size(height.div(6f), height.div(6f))
             .clip(ShapePath(frontTricepBig))
             .border(
-                shape = ShapePath(frontTricepBig), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(frontTricepBig), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -1272,7 +1293,7 @@ fun FrontTricep(
             .size(height.div(8f), height.div(8f))
             .clip(ShapePath(frontTricepSmall))
             .border(
-                shape = ShapePath(frontTricepSmall), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(frontTricepSmall), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -1292,7 +1313,7 @@ fun FrontTricep(
             .size(height.div(8f), height.div(8f))
             .clip(ShapePath(frontTricepSmall))
             .border(
-                shape = ShapePath(frontTricepSmall), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(frontTricepSmall), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -1316,7 +1337,7 @@ fun BoxScope.ChestPec(
             .size(height.div(4.5f), height.div(4.5f))
             .clip(ShapePath(pathChest))
             .border(
-                shape = ShapePath(pathChest), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(pathChest), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -1333,7 +1354,7 @@ fun BoxScope.ChestPec(
             .size(height.div(4.5f), height.div(4.5f))
             .clip(ShapePath(pathChest))
             .border(
-                shape = ShapePath(pathChest), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(pathChest), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -1354,7 +1375,7 @@ fun FrontDelt(
             .size(height.div(5f), height.div(5f))
             .clip(ShapePath(frontAndSideDelt))
             .border(
-                shape = ShapePath(frontAndSideDelt), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(frontAndSideDelt), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -1370,7 +1391,7 @@ fun FrontDelt(
             .size(height.div(5f), height.div(5f))
             .clip(ShapePath(frontAndSideDelt))
             .border(
-                shape = ShapePath(frontAndSideDelt), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(frontAndSideDelt), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -1390,7 +1411,7 @@ fun SideDelt(
             .size(height.div(5.5f), height.div(5f))
             .clip(ShapePath(frontAndSideDelt))
             .border(
-                shape = ShapePath(frontAndSideDelt), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(frontAndSideDelt), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
@@ -1406,7 +1427,7 @@ fun SideDelt(
             .size(height.div(5.5f), height.div(5f))
             .clip(ShapePath(frontAndSideDelt))
             .border(
-                shape = ShapePath(frontAndSideDelt), color = Color.LightGray, width = 1.dp
+                shape = ShapePath(frontAndSideDelt), color = Color.DarkGray, width = 1.dp
             )
             .background(color)
             .clickable { onClick() })
