@@ -3,18 +3,18 @@ package com.skydev.gymexercise.ui.screens.home
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.key
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,7 +34,7 @@ fun HomeScreen(
 ) {
 
     val selectorState = rememberMuscleSelectorState(height = 200.dp)
-    val muscles by remember(selectorState){
+    val muscles by remember(selectorState.selected.size) {
         derivedStateOf {
             selectorState.selected.map { it.name }
         }
@@ -42,16 +42,18 @@ fun HomeScreen(
 
     Column(Modifier.fillMaxSize()) {
         Row(
-            modifier = Modifier.fillMaxWidth().height(selectorState.height + 300.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(selectorState.height + 300.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             FrontMuscleSelector(modifier = Modifier.fillMaxHeight(), selectorState)
             RearMuscleSelector(modifier = modifier.fillMaxHeight(), selectorState)
         }
-        Row {
-            key(muscles.size) {
-                Text(text = "$muscles")
+        LazyRow {
+            items(muscles) { muscleName ->
+                Text(text = muscleName) // Display each selected muscle's name
             }
         }
     }

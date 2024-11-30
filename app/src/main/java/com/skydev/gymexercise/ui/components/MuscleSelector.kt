@@ -57,16 +57,17 @@ fun rememberMuscleSelectorState(
             } else {
                 selected.value + muscle
             }
-            Log.d("muscle","$selected")
+            Log.d("muscle", "$selected")
         }
     }
+
 
     val getColor: (MuscleGroups) -> Brush = remember {
         { muscle: MuscleGroups ->
             if (selected.value.contains(muscle)) Brush.radialGradient(
                 colors = listOf(
-                    Color(0xFFfb6376),
-                    Color(0xFFf0a6ca),
+                    Color(0xFF7fd1b9),
+                    Color(0xFF1c77c3),
                 ), radius = if (listOf(
                         MuscleGroups.QUADS,
                         MuscleGroups.HIP_FLAXOR,
@@ -90,16 +91,16 @@ fun rememberMuscleSelectorState(
                 ) {
                     Brush.radialGradient(
                         listOf(
-                            Color(0xFFf0e6ef),
-                            Color(0xFF52d1dc),
-                        ), radius = 100f
+                            Color(0xFFfb6376),
+                            Color(0xFFf0a6ca),
+
+                            ), radius = 100f
                     )
                 } else {
                     Brush.radialGradient(
                         listOf(
-                            Color(0xFFf0e6ef),
-                            Color(0xFF52d1dc),
-
+                            Color(0xFFfb6376),
+                            Color(0xFFf0a6ca),
                         )
                     )
                 }
@@ -107,13 +108,12 @@ fun rememberMuscleSelectorState(
         }
     }
 
-    return remember {
+    return remember(height) {
         MuscleSelectorState(
-            selected = selected.value,
-            selectionToggle,
-            getColor,
-            height
+            selected = selected.value, selectionToggle, getColor, height
         )
+    }.also {
+        selected.value = it.selected
     }
 }
 
@@ -130,8 +130,7 @@ fun RearMuscleSelector(
                 .size(state.height)
                 .aspectRatio(0.5f)
                 .clip(ShapePath(pathHumanRear))
-                .background(Color.DarkGray)
-            ,
+                .background(Color.DarkGray),
         )
 
 
@@ -1044,17 +1043,13 @@ fun FrontMuscleSelector(
         modifier = modifier, contentAlignment = Alignment.Center
     ) {
 
-
         Box(
             modifier = Modifier
                 .size(state.height)
                 .aspectRatio(0.5f)
                 .clip(ShapePath(pathHumanFront))
-                .background(Color.DarkGray)
-            ,
+                .background(Color.DarkGray),
         )
-
-
 
         FrontNeck(
             height = state.height, color = state.getColor(MuscleGroups.NECK)
@@ -1067,7 +1062,6 @@ fun FrontMuscleSelector(
         ) {
             state.selectionToggle(MuscleGroups.CHEST)
         }
-
 
         SideDelt(
             height = state.height, color = state.getColor(MuscleGroups.SIDE_DELTOID)
@@ -1113,6 +1107,9 @@ fun FrontMuscleSelector(
             state.selectionToggle(MuscleGroups.OBLIQUE)
         }
 
+        LatFront(height = state.height, color = state.getColor(MuscleGroups.LATS)) {
+            state.selectionToggle(MuscleGroups.LATS)
+        }
     }
 
 }
@@ -1883,6 +1880,13 @@ fun Oblique(
             .background(color)
             .clickable { onClick() })
     }
+
+}
+
+@Composable
+fun LatFront(
+    height: Dp, color: Brush, onClick: () -> Unit
+) {
 
     Box(modifier = Modifier
         .offset(x = -height.times(0.18f), y = -height.times(0.48f))
