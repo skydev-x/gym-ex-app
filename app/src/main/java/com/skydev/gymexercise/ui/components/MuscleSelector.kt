@@ -108,7 +108,7 @@ fun rememberMuscleSelectorState(
         }
     }
 
-    return remember(height) {
+    return remember(height,selected.value.size) {
         MuscleSelectorState(
             selected = selected.value, selectionToggle, getColor, height
         )

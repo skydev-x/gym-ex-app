@@ -53,7 +53,7 @@ fun HomeScreen(
         }
         LazyRow {
             items(muscles) { muscleName ->
-                Text(text = muscleName) // Display each selected muscle's name
+                Text(text = "$muscleName ") // Display each selected muscle's name
             }
         }
     }
