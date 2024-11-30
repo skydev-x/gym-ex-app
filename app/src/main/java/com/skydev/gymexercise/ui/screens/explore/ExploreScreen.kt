@@ -6,12 +6,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import com.skydev.gymexercise.ui.components.FrontMuscleSelector
 
 @Composable
 fun ExploreScreen(modifier: Modifier = Modifier, navController: NavController) {
-    Column(
-        modifier = modifier.fillMaxSize()
-    ) {
-        Text(text = "Explore Screen")
-    }
+    FrontMuscleSelector(modifier = modifier.fillMaxSize())
+
 }
